@@ -17,8 +17,18 @@ const SingleSelectQuestion = (props) => {
     }
 
     const onClickRemoveOption = optionOrderNo =>{
-        let filteredOptions = options.filter(i=> {return i.orderNo!=optionOrderNo});
+        const filteredOptions = options.filter(i=> {return i.orderNo!=optionOrderNo});
         setOptions(filteredOptions);
+    }
+
+    const optionChanged = (optionOrderNo, optionDescription) =>{
+        let modifiedOptions = [...options];
+        modifiedOptions.forEach(i=> {
+            if(i.orderNo == optionOrderNo){
+                i.description=optionDescription
+            }
+        })
+        setOptions(modifiedOptions);
     }
 
     const{orderNo, text, type } = props;
@@ -82,7 +92,7 @@ const SingleSelectQuestion = (props) => {
                                 <div className="answers mb-3 sortable">
                                     {
                                         options.map(i=> <SingleSelectOption key={i.orderNo} description={i.description} 
-                                            orderNo={i.orderNo} onClickRemove={onClickRemoveOption} />)
+                                            orderNo={i.orderNo} onClickRemove={onClickRemoveOption} onChangeDescription={optionChanged} />)
                                     }
                                 </div>
                                 <div className="text-center">
