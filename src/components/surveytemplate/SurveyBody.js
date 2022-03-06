@@ -1,20 +1,29 @@
 import { useState } from "react";
 import { useSelector } from 'react-redux';
-import SingleSelectQuestion from "../questions/SingleSelectQuestion";
+import SingleQuestion from "../questions/SingleQuestion";
 
 const SurveyBody = () => {
-    const [questions, setQuestions ] = useState([]);
+    const [questions, setQuestions] = useState([]);
     
     const addQuestion = () => {
         const newQuestion = {
             orderNo: questions.length+1,
-            title: undefined,
+            questionTitle: undefined,
             questionText: undefined,
-            type: undefined,
+            questionType: 1,
             options: []
         }
 
         setQuestions([...questions, newQuestion]);
+    }
+
+    const onClickRemoveQuestion = questionOrderNo => {
+        const filteredQuestions = questions.filter(i=> {return i.orderNo!=questionOrderNo});
+        setQuestions(filteredQuestions);
+    }
+
+    const onQuestionChanged = (changedQuestion) => {
+        console.log(changedQuestion);
     }
 
     return (
@@ -74,7 +83,10 @@ const SurveyBody = () => {
                                             <div className="sortable-survey">
                                                 <div>
                                                     {
-                                                        questions.map(i=> <SingleSelectQuestion orderNo={i.orderNo} />)
+                                                        questions.map(i=> <SingleQuestion key={i.orderNo} orderNo={i.orderNo} onClickRemove={onClickRemoveQuestion} 
+                                                                            questionTitle={i.questionTitle} questionText={i.questionText} 
+                                                                            questionType={i.questionType} options={i.options}
+                                                                            onQuestionChanged={onQuestionChanged} />)
                                                     }
                                                 </div>
                                             </div>

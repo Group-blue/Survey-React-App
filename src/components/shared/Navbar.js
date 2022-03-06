@@ -38,7 +38,7 @@ const Navbar = () => {
                         <div className="d-none d-md-inline-block align-text-bottom mr-3">
                             <div className="custom-switch custom-switch-primary-inverse custom-switch-small pl-1" 
                                 data-toggle="tooltip" data-placement="left" title="Dark Mode">
-                                <input className="custom-switch-input" id="switchDark" type="checkbox" checked/>
+                                <input className="custom-switch-input" id="switchDark" type="checkbox" />
                                 <label className="custom-switch-btn" htmlFor="switchDark"></label>
                             </div>
                         </div>

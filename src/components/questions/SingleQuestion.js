@@ -4,11 +4,25 @@ import RadioButtonViewOptions from "../viewmodeoptions/RadioButtonViewOptions";
 import SingleSelectViewOptions from "../viewmodeoptions/SingleSelectViewOptions";
 import CheckBoxViewOptions from "../viewmodeoptions/CheckBoxViewOptions";
 
-const SingleSelectQuestion = (props) => {
-    const[title, setTitle] = useState();
-    const[questionText, setQuestionText] = useState();
-    const[optionType, setOptionType] = useState('1');
-    const[options, setOptions] = useState([]);
+const SingleQuestion = (props) => {
+    const{ orderNo, onClickRemove, questionTitle, questionText:questionTextFromProps, questionType, options: optionsFromProps, onQuestionChanged } = props;
+
+
+    const[title, setTitle] = useState(questionTitle);
+    const[questionText, setQuestionText] = useState(questionTextFromProps);
+    const[optionType, setOptionType] = useState(questionType);
+    const[options, setOptions] = useState([...optionsFromProps]);
+
+    useEffect(() =>{
+        const changedQuestion = {
+            orderNo,
+            title,
+            questionText,
+            optionType,
+            options
+        }
+        onQuestionChanged(changedQuestion);
+    }, [title, questionText, optionType, options]);
 
     const addOption = () =>{
         let newOption = {
@@ -34,7 +48,11 @@ const SingleSelectQuestion = (props) => {
         setOptions(modifiedOptions);
     }
 
-    const{ orderNo } = props;
+    const clickRemoveQuestion = () => {
+        onClickRemove(orderNo);
+    }
+
+    
     return (
         <div>
             <div className="card question d-flex mb-4 edit-quesiton">
@@ -50,6 +68,9 @@ const SingleSelectQuestion = (props) => {
                     </div>
                     <div
                         className="custom-control custom-checkbox pl-1 align-self-center pr-4">
+                        <button className="btn btn-outline-danger icon-button" onClick={clickRemoveQuestion} >
+                            <i className="simple-icon-ban"></i>
+                        </button>
                         <button className="btn btn-outline-theme-3 icon-button edit-button">
                             <i className="simple-icon-pencil"></i>
                         </button>
@@ -69,18 +90,18 @@ const SingleSelectQuestion = (props) => {
                         <div className="edit-mode">
                             <div className="form-group mb-3">
                                 <label>Title</label>
-                                <input className="form-control" type="text" onChange={(event) => setTitle(event.target.value)} />
+                                <input className="form-control" type="text" defaultValue={title} onChange={(event) => setTitle(event.target.value)} />
                             </div>
                             <div className="form-group mb-5">
                                 <label>Question</label>
-                                <input className="form-control" type="text" onChange={(event) => setQuestionText(event.target.value)} />
+                                <input className="form-control" type="text" defaultValue={questionText} onChange={(event) => setQuestionText(event.target.value)} />
                             </div>
 
                             <div className="separator mb-4"></div>
 
                             <div className="form-group">
                                 <label className="d-block">Option Type</label>
-                                <select className="form-control select2-single" onChange={(event) => setOptionType(event.target.value)} data-width="100%">
+                                <select className="form-control select2-single" defaultValue={optionType} onChange={(event) => setOptionType(parseInt(event.target.value))} data-width="100%">
                                     <option value="1">Single Select</option>
                                     <option value="2">Checkbox</option>
                                     <option value="3">Radiobutton</option>
@@ -110,15 +131,15 @@ const SingleSelectQuestion = (props) => {
                             <label>{questionText}</label>
                             {(() => {
                             switch (optionType) {
-                                case '1':
+                                case 1:
                                     return (
                                         <SingleSelectViewOptions options={options} />
                                     )
-                                case '2':
+                                case 2:
                                     return (
                                         <CheckBoxViewOptions options={options} />
                                     )
-                                case '3':
+                                case 3:
                                     return (
                                         <RadioButtonViewOptions options={options} />
                                     )
@@ -138,4 +159,4 @@ const SingleSelectQuestion = (props) => {
     );
 };
 
-export default SingleSelectQuestion;
+export default SingleQuestion;
