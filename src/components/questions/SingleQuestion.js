@@ -5,24 +5,24 @@ import SingleSelectViewOptions from "../viewmodeoptions/SingleSelectViewOptions"
 import CheckBoxViewOptions from "../viewmodeoptions/CheckBoxViewOptions";
 
 const SingleQuestion = (props) => {
-    const{ orderNo, onClickRemove, questionTitle, questionText:questionTextFromProps, questionType, options: optionsFromProps, onQuestionChanged } = props;
+    const{ orderNo, onClickRemove, title:titleFromProps, text:textFromProps, type, options: optionsFromProps, onQuestionChanged } = props;
 
 
-    const[title, setTitle] = useState(questionTitle);
-    const[questionText, setQuestionText] = useState(questionTextFromProps);
-    const[optionType, setOptionType] = useState(questionType);
+    const[title, setTitle] = useState(titleFromProps);
+    const[text, setText] = useState(textFromProps);
+    const[optionType, setOptionType] = useState(type);
     const[options, setOptions] = useState([...optionsFromProps]);
 
     useEffect(() =>{
         const changedQuestion = {
             orderNo,
-            title,
-            questionText,
-            optionType,
+            title: title,
+            text,
+            type: optionType,
             options
         }
         onQuestionChanged(changedQuestion);
-    }, [title, questionText, optionType, options]);
+    }, [title, text, optionType, options]);
 
     const addOption = () =>{
         let newOption = {
@@ -94,7 +94,7 @@ const SingleQuestion = (props) => {
                             </div>
                             <div className="form-group mb-5">
                                 <label>Question</label>
-                                <input className="form-control" type="text" defaultValue={questionText} onChange={(event) => setQuestionText(event.target.value)} />
+                                <input className="form-control" type="text" defaultValue={text} onChange={(event) => setText(event.target.value)} />
                             </div>
 
                             <div className="separator mb-4"></div>
@@ -128,7 +128,7 @@ const SingleQuestion = (props) => {
                         </div>
 
                         <div className="view-mode">
-                            <label>{questionText}</label>
+                            <label>{text}</label>
                             {(() => {
                             switch (optionType) {
                                 case 1:

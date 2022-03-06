@@ -1,16 +1,35 @@
-import { useState } from "react";
-import { useSelector } from 'react-redux';
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from 'react-redux';
+import { clearTemplate, saveTemplate } from "../../redux/actions/TemplateActions";
 import SingleQuestion from "../questions/SingleQuestion";
+import { saveTemplateRequest } from '../../api/ApiCalls';
 
 const SurveyBody = () => {
-    const [questions, setQuestions] = useState([]);
+
+    const{templateNameFromStore, explanationFromStore, questionsFromStore} = useSelector(store => ({
+        templateNameFromStore: store.templateName,
+        explanationFromStore: store.explanation,
+        questionsFromStore: store.questions
+    }));
+
+    const [questions, setQuestions] = useState(questionsFromStore);
+    const [templateName, setTemplateName] = useState(templateNameFromStore);
+    const [explanation, setExplanation] = useState(explanationFromStore);
+
+    const dispatch = useDispatch();
+
+    useEffect(()=>{
+        setQuestions(questionsFromStore);
+        setTemplateName(templateNameFromStore);
+        setExplanation(explanationFromStore);
+    }, [templateNameFromStore, explanationFromStore, questionsFromStore]);
     
     const addQuestion = () => {
         const newQuestion = {
             orderNo: questions.length < 1 ? 1 : questions[questions.length-1].orderNo+1,
-            questionTitle: undefined,
-            questionText: undefined,
-            questionType: 1,
+            title: undefined,
+            text: undefined,
+            type: 1,
             options: []
         }
 
@@ -32,6 +51,43 @@ const SurveyBody = () => {
         setQuestions(tempQuestions);
     }
 
+    const onClickSaveToBrowser = () => {
+        const template = {
+            isDraft: true,
+            templateName,
+            explanation,
+            questions
+        }
+
+        dispatch(saveTemplate(template));
+    }
+
+    const onClickClearBrowserCash = () => {
+        const template = {
+            isDraft: true,
+            templateName: undefined,
+            explanation: undefined,
+            questions: []
+        }
+
+        dispatch(clearTemplate(template));
+    }
+
+   const sendSaveTemplateRequest = async () => {
+        const template = {
+            isDraft: true,
+            templateName,
+            explanation,
+            questions
+        }
+
+        try{
+            const apiResponse = await saveTemplateRequest(template);
+        } catch (apiError) {
+            console.log(apiError);
+        }
+   } 
+
     return (
         <div>
             <main>
@@ -44,11 +100,12 @@ const SurveyBody = () => {
                                     <button type="button"
                                         className="btn btn-lg btn-outline-primary dropdown-toggle dropdown-toggle-split top-right-button top-right-button-single"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        ACTIONS
+                                        SAVE ACTIONS
                                     </button>
                                     <div className="dropdown-menu dropdown-menu-right">
-                                        <a className="dropdown-item" href="#">Action</a>
-                                        <a className="dropdown-item" href="#">Another action</a>
+                                        <a className="dropdown-item" href="#" onClick={onClickSaveToBrowser}>Save to Browser Cash</a>
+                                        <a className="dropdown-item" href="#" onClick={onClickClearBrowserCash}>Clear Browser Cash</a>
+                                        <a className="dropdown-item" href="#" onClick={sendSaveTemplateRequest}>Save to Database</a>
                                     </div>
                                 </div>
                             </div>
@@ -71,9 +128,11 @@ const SurveyBody = () => {
                                                 <div className="card-body">
                                                     <p className="list-item-heading mb-4">Summary</p>
                                                     <p className="text-muted text-small mb-2">Name</p>
-                                                    <input className="mb-3 form-control" type="text" placeholder="Enter Template Name" />
+                                                    <input className="mb-3 form-control" type="text" placeholder="Enter Template Name" 
+                                                    onChange={(event)=>setTemplateName(event.target.value)} defaultValue={templateName} />
                                                     <p className="text-muted text-small mb-2">Explanation</p>
-                                                    <textarea className="mb-3 form-control" rows="3" placeholder="Enter Template Explanation" />
+                                                    <textarea className="mb-3 form-control" rows="3" placeholder="Enter Template Explanation"
+                                                    onChange={(event)=>setExplanation(event.target.value)} defaultValue={explanation} />
 
 
                                                     <div className="text-center">
@@ -90,8 +149,8 @@ const SurveyBody = () => {
                                                 <div>
                                                     {
                                                         questions.map(i=> <SingleQuestion key={i.orderNo} orderNo={i.orderNo} onClickRemove={onClickRemoveQuestion} 
-                                                                            questionTitle={i.questionTitle} questionText={i.questionText} 
-                                                                            questionType={i.questionType} options={i.options}
+                                                                            title={i.title} text={i.text} 
+                                                                            type={i.type} options={i.options}
                                                                             onQuestionChanged={onQuestionChanged} />)
                                                     }
                                                 </div>

@@ -1,2 +1,2 @@
-export const ADD_ANSWER = 'add-answer';
-export const ADD_QUESTION = 'add-question';
+export const SAVE_TEMPLATE = 'save-template';
+export const CLEAR_TEMPLATE = 'clear-template';
