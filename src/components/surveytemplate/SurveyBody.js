@@ -23,7 +23,13 @@ const SurveyBody = () => {
     }
 
     const onQuestionChanged = (changedQuestion) => {
-        console.log(changedQuestion);
+        let tempQuestions = [...questions];
+        for(let i=0;i<tempQuestions.length;i++){
+            if(tempQuestions[i].orderNo === changedQuestion.orderNo){
+                tempQuestions[i] = changedQuestion;
+            }
+        }
+        setQuestions(tempQuestions);
     }
 
     return (
