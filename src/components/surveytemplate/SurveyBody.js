@@ -7,7 +7,7 @@ const SurveyBody = () => {
     
     const addQuestion = () => {
         const newQuestion = {
-            orderNo: questions.length+1,
+            orderNo: questions.length < 1 ? 1 : questions[questions.length-1].orderNo+1,
             questionTitle: undefined,
             questionText: undefined,
             questionType: 1,

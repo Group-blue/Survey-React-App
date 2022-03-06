@@ -26,7 +26,7 @@ const SingleQuestion = (props) => {
 
     const addOption = () =>{
         let newOption = {
-            orderNo: options.length+1,
+            orderNo: options.length<1 ? 1 : options[options.length-1].orderNo+1,
             description: ""
         }
 
