@@ -1,6 +1,27 @@
+import { useState, useEffect } from "react";
+import SingleSelectOption from "../answers/SingleSelectOption";
 
 const SingleSelectQuestion = (props) => {
-    const{ title, orderNo, text, type, options } = props;
+    const[title, setTitle] = useState();
+    const[questionText, setQuestionText] = useState();
+    const[optionType, setOptionType] = useState();
+    const[options, setOptions] = useState([]);
+
+    const addOption = () =>{
+        let newOption = {
+            orderNo: options.length+1,
+            description: ""
+        }
+
+        setOptions([ ...options, newOption]);
+    }
+
+    const onClickRemoveOption = optionOrderNo =>{
+        let filteredOptions = options.filter(i=> {return i.orderNo!=optionOrderNo});
+        setOptions(filteredOptions);
+    }
+
+    const{orderNo, text, type } = props;
     return (
         <div>
             <div className="card question d-flex mb-4 edit-quesiton">
@@ -35,19 +56,18 @@ const SingleSelectQuestion = (props) => {
                         <div className="edit-mode">
                             <div className="form-group mb-3">
                                 <label>Title</label>
-                                <input className="form-control" type="text" value={title}/>
+                                <input className="form-control" type="text" onChange={(event) => setTitle(event.target.value)} />
                             </div>
                             <div className="form-group mb-5">
                                 <label>Question</label>
-                                <input className="form-control" type="text"
-                                    value={text}/>
+                                <input className="form-control" type="text" onChange={(event) => setQuestionText(event.target.value)} />
                             </div>
 
                             <div className="separator mb-4"></div>
 
                             <div className="form-group">
-                                <label className="d-block">Answer Type</label>
-                                <select className="form-control select2-single" value={type} data-width="100%">
+                                <label className="d-block">Option Type</label>
+                                <select className="form-control select2-single" onChange={(event) => setOptionType(event.target.value)} data-width="100%">
                                     <option label="&nbsp;">&nbsp;</option>
                                     <option value="0">Text Input</option>
                                     <option value="1">Single Select</option>
@@ -58,90 +78,30 @@ const SingleSelectQuestion = (props) => {
                             </div>
 
                             <div className="form-group">
-                                <label className="d-block">Answers</label>
+                                <label className="d-block">Options</label>
                                 <div className="answers mb-3 sortable">
-                                    <div className="mb-1 position-relative">
-                                        <input className="form-control" type="text" value="18-24"/>
-                                        <div className="input-icons">
-                                            <span className="badge badge-pill handle pr-0 mr-0">
-                                                <i className="simple-icon-cursor-move"></i>
-                                            </span>
-                                            <span className="badge badge-pill">
-                                                <i className="simple-icon-ban"></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div className="mb-1 position-relative">
-                                        <input className="form-control" type="text"
-                                            value="24-30"/>
-                                        <div className="input-icons">
-                                            <span
-                                                className="badge badge-pill handle pr-0 mr-0">
-                                                <i className="simple-icon-cursor-move"></i>
-                                            </span>
-                                            <span className="badge badge-pill">
-                                                <i className="simple-icon-ban"></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div className="mb-1 position-relative">
-                                        <input className="form-control" type="text"
-                                            value="30-40"/>
-                                        <div className="input-icons">
-                                            <span
-                                                className="badge badge-pill handle pr-0 mr-0">
-                                                <i className="simple-icon-cursor-move"></i>
-                                            </span>
-                                            <span className="badge badge-pill">
-                                                <i className="simple-icon-ban"></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div className="mb-1 position-relative">
-                                        <input className="form-control" type="text"
-                                            value="40-50"/>
-                                        <div className="input-icons">
-                                            <span
-                                                className="badge badge-pill handle pr-0 mr-0">
-                                                <i className="simple-icon-cursor-move"></i>
-                                            </span>
-                                            <span className="badge badge-pill">
-                                                <i className="simple-icon-ban"></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div className="mb-1 position-relative">
-                                        <input className="form-control" type="text"
-                                            value="50+"/>
-                                        <div className="input-icons">
-                                            <span
-                                                className="badge badge-pill handle pr-0 mr-0">
-                                                <i className="simple-icon-cursor-move"></i>
-                                            </span>
-                                            <span className="badge badge-pill">
-                                                <i className="simple-icon-ban"></i>
-                                            </span>
-                                        </div>
-                                    </div>
+                                    {
+                                        options.map(i=> <SingleSelectOption key={i.orderNo} description={i.description} 
+                                            orderNo={i.orderNo} onClickRemove={onClickRemoveOption} />)
+                                    }
                                 </div>
                                 <div className="text-center">
-                                    <button type="button"
+                                    <button type="button" onClick={addOption}
                                         className="btn btn-outline-primary btn-sm mb-2">
                                         <i className="simple-icon-plus btn-group-icon"></i>
-                                        Add Answer</button>
+                                        Add Option
+                                    </button>
                                 </div>
                             </div>
                         </div>
 
                         <div className="view-mode">
-                            <label>How old are you?</label>
+                            <label>{questionText}</label>
                             <select className="form-control select2-single" data-width="100%">
                                 <option label="&nbsp;">&nbsp;</option>
-                                <option value="0">18-24</option>
-                                <option value="1">24-30</option>
-                                <option value="2">30-40</option>
-                                <option value="3">40-50</option>
-                                <option value="4">50+</option>
+                                {
+                                    options.map(i=> <option value={i.orderNo}>{i.description}</option>)
+                                }
                             </select>
                         </div>
 
