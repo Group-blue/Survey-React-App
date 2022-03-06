@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
-import SingleSelectOption from "../answers/SingleSelectOption";
+import EditOption from "../editmodeoptions/EditOption";
+import RadioButtonViewOptions from "../viewmodeoptions/RadioButtonViewOptions";
+import SingleSelectViewOptions from "../viewmodeoptions/SingleSelectViewOptions";
+import CheckBoxViewOptions from "../viewmodeoptions/CheckBoxViewOptions";
 
 const SingleSelectQuestion = (props) => {
     const[title, setTitle] = useState();
     const[questionText, setQuestionText] = useState();
-    const[optionType, setOptionType] = useState();
+    const[optionType, setOptionType] = useState('1');
     const[options, setOptions] = useState([]);
 
     const addOption = () =>{
@@ -78,12 +81,10 @@ const SingleSelectQuestion = (props) => {
                             <div className="form-group">
                                 <label className="d-block">Option Type</label>
                                 <select className="form-control select2-single" onChange={(event) => setOptionType(event.target.value)} data-width="100%">
-                                    <option label="&nbsp;">&nbsp;</option>
-                                    <option value="0">Text Input</option>
                                     <option value="1">Single Select</option>
-                                    <option value="2">Multiple Select</option>
-                                    <option value="3">Checkbox</option>
-                                    <option value="4">Radiobutton</option>
+                                    <option value="2">Checkbox</option>
+                                    <option value="3">Radiobutton</option>
+                                    <option value="4">Text Input</option>
                                 </select>
                             </div>
 
@@ -91,7 +92,7 @@ const SingleSelectQuestion = (props) => {
                                 <label className="d-block">Options</label>
                                 <div className="answers mb-3 sortable">
                                     {
-                                        options.map(i=> <SingleSelectOption key={i.orderNo} description={i.description} 
+                                        options.map(i=> <EditOption key={i.orderNo} description={i.description} 
                                             orderNo={i.orderNo} onClickRemove={onClickRemoveOption} onChangeDescription={optionChanged} />)
                                     }
                                 </div>
@@ -107,14 +108,29 @@ const SingleSelectQuestion = (props) => {
 
                         <div className="view-mode">
                             <label>{questionText}</label>
-                            <select className="form-control select2-single" data-width="100%">
-                                <option label="&nbsp;">&nbsp;</option>
-                                {
-                                    options.map(i=> <option value={i.orderNo}>{i.description}</option>)
-                                }
-                            </select>
-                        </div>
+                            {(() => {
+  
+                            switch (optionType) {
+                                case '1':
+                                    return (
+                                        <SingleSelectViewOptions options={options} />
+                                    )
+                                case '2':
+                                    return (
+                                        <CheckBoxViewOptions options={options} />
+                                    )
+                                case '3':
+                                    return (
+                                        <RadioButtonViewOptions options={options} />
+                                    )
+                                default:
+                                    return (
+                                    <div></div>
+                                    )
+                            }
 
+                            })()}
+                        </div>
                     </div>
                 </div>
             </div>
