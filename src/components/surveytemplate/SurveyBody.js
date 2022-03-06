@@ -3,8 +3,19 @@ import { useSelector } from 'react-redux';
 import SingleSelectQuestion from "../questions/SingleSelectQuestion";
 
 const SurveyBody = () => {
-    const { questions } = useSelector(store =>({questions: store.questions}));
-    const firstQuestion = questions[0];
+    const [questions, setQuestions ] = useState([]);
+    
+    const addQuestion = () => {
+        const newQuestion = {
+            orderNo: questions.length+1,
+            title: undefined,
+            questionText: undefined,
+            type: undefined,
+            options: []
+        }
+
+        setQuestions([...questions, newQuestion]);
+    }
 
     return (
         <div>
@@ -62,22 +73,22 @@ const SurveyBody = () => {
                                         <div className="col-12 col-lg-8">
                                             <div className="sortable-survey">
                                                 <div>
-                                                    <SingleSelectQuestion orderNo={firstQuestion.orderNo} title={firstQuestion.title} text={firstQuestion.text}
-                                                     type={firstQuestion.type} options={firstQuestion.options} />
+                                                    {
+                                                        questions.map(i=> <SingleSelectQuestion orderNo={i.orderNo} />)
+                                                    }
                                                 </div>
                                             </div>
 
                                             <div className="text-center">
-                                                <button type="button" className="btn btn-outline-primary btn-sm mb-2">
+                                                <button type="button" className="btn btn-outline-primary btn-sm mb-2" onClick={addQuestion}>
                                                     <i className="simple-icon-plus btn-group-icon"></i>
-                                                    Add Question</button>
+                                                    Add Question
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
-
                         </div>
                     </div>
                 </div>

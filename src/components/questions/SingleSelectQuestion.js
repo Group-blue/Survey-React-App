@@ -34,7 +34,7 @@ const SingleSelectQuestion = (props) => {
         setOptions(modifiedOptions);
     }
 
-    const{orderNo, text, type } = props;
+    const{ orderNo } = props;
     return (
         <div>
             <div className="card question d-flex mb-4 edit-quesiton">
@@ -109,7 +109,6 @@ const SingleSelectQuestion = (props) => {
                         <div className="view-mode">
                             <label>{questionText}</label>
                             {(() => {
-  
                             switch (optionType) {
                                 case '1':
                                     return (
@@ -125,10 +124,11 @@ const SingleSelectQuestion = (props) => {
                                     )
                                 default:
                                     return (
-                                    <div></div>
+                                    <div>
+                                        <input className="form-control" type="text" placeholder="Enter your answer here." />
+                                    </div>
                                     )
                             }
-
                             })()}
                         </div>
                     </div>
