@@ -8,9 +8,9 @@ const Menu = () => {
                     <div className="scroll">
                         <ul className="list-unstyled">
                             <li>
-                                <a href="#dashboard">
-                                    <i className="iconsminds-shop-4"></i>
-                                    <span>Dashboards</span>
+                                <a href="#templates">
+                                    <i className="iconsminds-duplicate-layer"></i>
+                                    <span>Survey Templates</span>
                                 </a>
                             </li>
                             <li>
@@ -33,13 +33,13 @@ const Menu = () => {
                                     <i className="iconsminds-three-arrow-fork"></i> Menu
                                 </a>
                             </li>
-                            <li className="active">
-                                <a href="Blank.Page.html">
+                            <li>
+                                <a href="#">
                                     <i className="iconsminds-bucket"></i> Blank Page
                                 </a>
                             </li>
                             <li>
-                                <a href="https://dore-jquery-docs.coloredstrategies.com" target="_blank">
+                                <a href="#">
                                     <i className="iconsminds-library"></i> Docs
                                 </a>
                             </li>
@@ -49,25 +49,15 @@ const Menu = () => {
 
                 <div className="sub-menu">
                     <div className="scroll">
-                        <ul className="list-unstyled" data-link="dashboard">
+                        <ul className="list-unstyled" data-link="templates">
                             <li>
-                                <a href="Dashboard.Default.html">
-                                    <i className="simple-icon-rocket"></i> <span className="d-inline-block">Default</span>
+                                <a href="#">
+                                    <i className="iconsminds-box-with-folders"></i> <span className="d-inline-block">Template List</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="Dashboard.Analytics.html">
-                                    <i className="simple-icon-pie-chart"></i> <span className="d-inline-block">Analytics</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="Dashboard.Ecommerce.html">
-                                    <i className="simple-icon-basket-loaded"></i> <span className="d-inline-block">Ecommerce</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="Dashboard.Content.html">
-                                    <i className="simple-icon-doc"></i> <span className="d-inline-block">Content</span>
+                                <a href="#/createtemplate">
+                                    <i className="iconsminds-add-file"></i> <span className="d-inline-block">Create New Template</span>
                                 </a>
                             </li>
                         </ul>
@@ -80,19 +70,19 @@ const Menu = () => {
                                 <div id="collapseAuthorization" className="collapse show">
                                     <ul className="list-unstyled inner-level-menu">
                                         <li>
-                                            <a href="Pages.Auth.Login.html">
+                                            <a href="#">
                                                 <i className="simple-icon-user-following"></i> <span
                                                     className="d-inline-block">Login</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="Pages.Auth.Register.html">
+                                            <a href="#">
                                                 <i className="simple-icon-user-follow"></i> <span
                                                     className="d-inline-block">Register</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="Pages.Auth.ForgotPassword.html">
+                                            <a href="#">
                                                 <i className="simple-icon-user-unfollow"></i> <span className="d-inline-block">Forgot
                                                     Password</span>
                                             </a>
@@ -108,25 +98,25 @@ const Menu = () => {
                                 <div id="collapseProduct" className="collapse show">
                                     <ul className="list-unstyled inner-level-menu">
                                         <li>
-                                            <a href="Pages.Product.List.html">
+                                            <a href="#">
                                                 <i className="simple-icon-credit-card"></i> <span className="d-inline-block">Data
                                                     List</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="Pages.Product.Thumbs.html">
+                                            <a href="#">
                                                 <i className="simple-icon-list"></i> <span className="d-inline-block">Thumb
                                                     List</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="Pages.Product.Images.html">
+                                            <a href="#">
                                                 <i className="simple-icon-grid"></i> <span className="d-inline-block">Image
                                                     List</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="Pages.Product.Detail.html">
+                                            <a href="#">
                                                 <i className="simple-icon-book-open"></i> <span className="d-inline-block">Detail</span>
                                             </a>
                                         </li>
@@ -141,12 +131,12 @@ const Menu = () => {
                                 <div id="collapseProfile" className="collapse show">
                                     <ul className="list-unstyled inner-level-menu">
                                         <li>
-                                            <a href="Pages.Profile.Social.html">
+                                            <a href="#">
                                                 <i className="simple-icon-share"></i> <span className="d-inline-block">Social</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="Pages.Profile.Portfolio.html">
+                                            <a href="#">
                                                 <i className="simple-icon-link"></i> <span className="d-inline-block">Portfolio</span>
                                             </a>
                                         </li>
@@ -161,17 +151,17 @@ const Menu = () => {
                                 <div id="collapseBlog" className="collapse show">
                                     <ul className="list-unstyled inner-level-menu">
                                         <li>
-                                            <a href="Pages.Blog.html">
+                                            <a href="#">
                                                 <i className="simple-icon-list"></i> <span className="d-inline-block">List</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="Pages.Blog.Detail.html">
+                                            <a href="#">
                                                 <i className="simple-icon-book-open"></i> <span className="d-inline-block">Detail</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="Pages.Blog.Detail.Alt.html">
+                                            <a href="#">
                                                 <i className="simple-icon-picture"></i> <span className="d-inline-block">Detail
                                                     Alt</span>
                                             </a>
@@ -187,46 +177,46 @@ const Menu = () => {
                                 <div id="collapseMisc" className="collapse show">
                                     <ul className="list-unstyled inner-level-menu">
                                         <li>
-                                            <a href="Pages.Misc.Coming.Soon.html">
+                                            <a href="#">
                                                 <i className="simple-icon-hourglass"></i> <span className="d-inline-block">Coming
                                                     Soon</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="Pages.Misc.Error.html">
+                                            <a href="#">
                                                 <i className="simple-icon-exclamation"></i> <span
                                                     className="d-inline-block">Error</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="Pages.Misc.Faq.html">
+                                            <a href="#">
                                                 <i className="simple-icon-question"></i> <span className="d-inline-block">Faq</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="Pages.Misc.Invoice.html">
+                                            <a href="#">
                                                 <i className="simple-icon-bag"></i> <span className="d-inline-block">Invoice</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="Pages.Misc.Knowledge.Base.html">
+                                            <a href="#">
                                                 <i className="simple-icon-graduation"></i> <span className="d-inline-block">Knowledge
                                                     Base</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="Pages.Misc.Mailing.html">
+                                            <a href="#">
                                                 <i className="simple-icon-envelope-open"></i> <span
                                                     className="d-inline-block">Mailing</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="Pages.Misc.Pricing.html">
+                                            <a href="#">
                                                 <i className="simple-icon-diamond"></i> <span className="d-inline-block">Pricing</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="Pages.Misc.Search.html">
+                                            <a href="#">
                                                 <i className="simple-icon-magnifier"></i> <span className="d-inline-block">Search</span>
                                             </a>
                                         </li>
@@ -237,22 +227,22 @@ const Menu = () => {
                         </ul>
                         <ul className="list-unstyled" data-link="applications">
                             <li>
-                                <a href="Apps.MediaLibrary.html">
+                                <a href="#">
                                     <i className="simple-icon-picture"></i> <span className="d-inline-block">Library</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="Apps.Todo.List.html">
+                                <a href="#">
                                     <i className="simple-icon-check"></i> <span className="d-inline-block">Todo</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="Apps.Survey.List.html">
+                                <a href="#">
                                     <i className="simple-icon-calculator"></i> <span className="d-inline-block">Survey</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="Apps.Chat.html">
+                                <a href="#">
                                     <i className="simple-icon-bubbles"></i> <span className="d-inline-block">Chat</span>
                                 </a>
                             </li>
@@ -266,22 +256,22 @@ const Menu = () => {
                                 <div id="collapseForms" className="collapse show">
                                     <ul className="list-unstyled inner-level-menu">
                                         <li>
-                                            <a href="Ui.Forms.Components.html">
+                                            <a href="#">
                                                 <i className="simple-icon-event"></i> <span className="d-inline-block">Components</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="Ui.Forms.Layouts.html">
+                                            <a href="#">
                                                 <i className="simple-icon-doc"></i> <span className="d-inline-block">Layouts</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="Ui.Forms.Validation.html">
+                                            <a href="#">
                                                 <i className="simple-icon-check"></i> <span className="d-inline-block">Validation</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="Ui.Forms.Wizard.html">
+                                            <a href="#">
                                                 <i className="simple-icon-magic-wand"></i> <span
                                                     className="d-inline-block">Wizard</span>
                                             </a>
@@ -297,24 +287,24 @@ const Menu = () => {
                                 <div id="collapseDataTables" className="collapse show">
                                     <ul className="list-unstyled inner-level-menu">
                                         <li>
-                                            <a href="Ui.Datatables.Rows.html">
+                                            <a href="#">
                                                 <i className="simple-icon-screen-desktop"></i> <span className="d-inline-block">Full
                                                     Page UI</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="Ui.Datatables.Scroll.html">
+                                            <a href="#">
                                                 <i className="simple-icon-mouse"></i> <span className="d-inline-block">Scrollable</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="Ui.Datatables.Pagination.html">
+                                            <a href="#">
                                                 <i className="simple-icon-notebook"></i> <span
                                                     className="d-inline-block">Pagination</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="Ui.Datatables.Default.html">
+                                            <a href="#">
                                                 <i className="simple-icon-grid"></i> <span className="d-inline-block">Default</span>
                                             </a>
                                         </li>
@@ -329,97 +319,97 @@ const Menu = () => {
                                 <div id="collapseComponents" className="collapse show">
                                     <ul className="list-unstyled inner-level-menu">
                                         <li>
-                                            <a href="Ui.Components.Alerts.html">
+                                            <a href="#">
                                                 <i className="simple-icon-bell"></i> <span className="d-inline-block">Alerts</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="Ui.Components.Badges.html">
+                                            <a href="#">
                                                 <i className="simple-icon-badge"></i> <span className="d-inline-block">Badges</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="Ui.Components.Buttons.html">
+                                            <a href="#">
                                                 <i className="simple-icon-control-play"></i> <span
                                                     className="d-inline-block">Buttons</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="Ui.Components.Cards.html">
+                                            <a href="#">
                                                 <i className="simple-icon-layers"></i> <span className="d-inline-block">Cards</span>
                                             </a>
                                         </li>
 
                                         <li>
-                                            <a href="Ui.Components.Carousel.html">
+                                            <a href="#">
                                                 <i className="simple-icon-picture"></i> <span className="d-inline-block">Carousel</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="Ui.Components.Charts.html">
+                                            <a href="#">
                                                 <i className="simple-icon-chart"></i> <span className="d-inline-block">Charts</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="Ui.Components.Collapse.html">
+                                            <a href="#">
                                                 <i className="simple-icon-arrow-up"></i> <span
                                                     className="d-inline-block">Collapse</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="Ui.Components.Dropdowns.html">
+                                            <a href="#">
                                                 <i className="simple-icon-arrow-down"></i> <span
                                                     className="d-inline-block">Dropdowns</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="Ui.Components.Editors.html">
+                                            <a href="#">
                                                 <i className="simple-icon-book-open"></i> <span
                                                     className="d-inline-block">Editors</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="Ui.Components.Icons.html">
+                                            <a href="#">
                                                 <i className="simple-icon-star"></i> <span className="d-inline-block">Icons</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="Ui.Components.InputGroups.html">
+                                            <a href="#">
                                                 <i className="simple-icon-note"></i> <span className="d-inline-block">Input
                                                     Groups</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="Ui.Components.Jumbotron.html">
+                                            <a href="#">
                                                 <i className="simple-icon-screen-desktop"></i> <span
                                                     className="d-inline-block">Jumbotron</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="Ui.Components.Modal.html">
+                                            <a href="#">
                                                 <i className="simple-icon-docs"></i> <span className="d-inline-block">Modal</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="Ui.Components.Navigation.html">
+                                            <a href="#">
                                                 <i className="simple-icon-cursor"></i> <span
                                                     className="d-inline-block">Navigation</span>
                                             </a>
                                         </li>
 
                                         <li>
-                                            <a href="Ui.Components.PopoverandTooltip.html">
+                                            <a href="#">
                                                 <i className="simple-icon-pin"></i> <span className="d-inline-block">Popover &
                                                     Tooltip</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="Ui.Components.Sortable.html">
+                                            <a href="#">
                                                 <i className="simple-icon-shuffle"></i> <span className="d-inline-block">Sortable</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="Ui.Components.Tables.html">
+                                            <a href="#">
                                                 <i className="simple-icon-grid"></i> <span className="d-inline-block">Tables</span>
                                             </a>
                                         </li>
@@ -438,25 +428,25 @@ const Menu = () => {
                                 <div id="collapseMenuTypes" className="collapse show" data-parent="#menuTypes">
                                     <ul className="list-unstyled inner-level-menu">
                                         <li>
-                                            <a href="Menu.Default.html">
+                                            <a href="#">
                                                 <i className="simple-icon-control-pause"></i> <span
                                                     className="d-inline-block">Default</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="Menu.Subhidden.html">
+                                            <a href="#">
                                                 <i className="simple-icon-arrow-left mi-subhidden"></i> <span
                                                     className="d-inline-block">Subhidden</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="Menu.Hidden.html">
+                                            <a href="#">
                                                 <i className="simple-icon-control-start mi-hidden"></i> <span
                                                     className="d-inline-block">Hidden</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="Menu.Mainhidden.html">
+                                            <a href="#">
                                                 <i className="simple-icon-control-rewind mi-hidden"></i> <span
                                                     className="d-inline-block">Mainhidden</span>
                                             </a>

@@ -1,11 +1,15 @@
 
 const SurveyCard = (props) => {
-    const { id, templateName, validityStartDate, draft } = props;
+    const { id, templateName, validityStartDate, draft, onClickListItem } = props;
 
     const convertTimestampToDate = (timestamp) => {
         let date = new Intl.DateTimeFormat('tr-TR', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' })
         .format(timestamp);
         return date;
+    }
+
+    const onClickItem = () => {
+        onClickListItem(id);
     }
 
     return (
@@ -15,7 +19,7 @@ const SurveyCard = (props) => {
                     <div
                         className="card-body align-self-center d-flex flex-column flex-md-row justify-content-between min-width-zero align-items-md-center">
                         <a className="list-item-heading mb-0 truncate w-40 w-xs-100 mt-0"
-                            href="#">
+                            href="#" onClick={onClickItem} >
                             <i className="simple-icon-refresh heading-icon"></i>
                             <span className="align-middle d-inline-block">{templateName}</span>
                         </a>

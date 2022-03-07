@@ -27,6 +27,11 @@ const SurveyList = () => {
         }
     }
 
+    const onClickListItem = (itemId) => {
+        // send request to backend get details about itemId than push to details page
+        console.log("clicked to.....: "+itemId)
+    }
+
     return (
         <div className="container-fluid">
             <div className="row app-row">
@@ -191,7 +196,8 @@ const SurveyList = () => {
 
                     <div className="list disable-text-selection" data-check-all="checkAll">
                         {
-                            templates.map(i=> <SurveyCard key={i.id} id={i.id} templateName={i.templateName} validityStartDate={i.validityStartDate} draft={i.draft} />)
+                            templates.map(i=> <SurveyCard key={i.id} id={i.id} templateName={i.templateName} 
+                                validityStartDate={i.validityStartDate} draft={i.draft} onClickListItem={onClickListItem} />)
                         }
                     </div>
                 </div>
