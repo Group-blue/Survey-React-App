@@ -13,3 +13,16 @@ export const clearTemplate = template => {
         template
     };
 };
+
+export const updateTemplatesList = templates => {
+    return {
+        type: ACTIONS.UPDATE_TEMPLATES_LIST,
+        templates
+    };
+};
+
+export const clearTemplatesList = () => {
+    return {
+        type: ACTIONS.CLEAR_TEMPLATES_LIST
+    };
+};

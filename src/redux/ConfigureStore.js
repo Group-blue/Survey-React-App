@@ -20,10 +20,22 @@ const updateStateInStorage = newState => {
 
 export const getDefaultState = () => {
     let defaultState = {
-        isDraft: true,
-        templateName: undefined,
-        explanation: undefined,
-        questions: []
+        createSurveyTemplate: {
+            isDraft: true,
+            templateName: undefined,
+            explanation: undefined,
+            questions: []
+        },
+        surveyTemplateList: {
+            templates: []
+        },
+        currentSurveyTemplate: {
+            id: undefined,
+            isDraft: true,
+            templateName: undefined,
+            explanation: undefined,
+            questions: []
+        }
     }
 
     return defaultState;
