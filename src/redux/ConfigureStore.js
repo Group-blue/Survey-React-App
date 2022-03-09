@@ -35,6 +35,25 @@ export const getDefaultState = () => {
             templateName: undefined,
             explanation: undefined,
             questions: []
+        },
+        createSurvey: {
+            id: undefined,
+            sequenceNumber: undefined,
+            startDate: undefined,
+            endDate: undefined,
+            courseId: undefined,
+            templateId: undefined,
+        },
+        surveyList: {
+            surveys: []
+        },
+        currentSurvey: {
+            id: undefined,
+            sequenceNumber: undefined,
+            startDate: undefined,
+            endDate: undefined,
+            courseId: undefined,
+            templateId: undefined,
         }
     }
 

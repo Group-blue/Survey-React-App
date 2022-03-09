@@ -39,3 +39,17 @@ export const clearCurrentTemplate = () => {
         type: ACTIONS.CLEAR_CURRENT_TEMPLATE
     };
 };
+
+
+export const updateSurveyList = surveys => {
+    return {
+        type: ACTIONS.UPDATE_SURVEY_LIST,
+        surveys
+    };
+};
+
+export const clearSurveyList = () => {
+    return {
+        type: ACTIONS.CLEAR_SURVEY_LIST
+    };
+};

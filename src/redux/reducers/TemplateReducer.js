@@ -26,6 +26,14 @@ const TemplateReducer = (state = {...getDefaultState}, action) => {
         let tempState = {...state};
         tempState.currentSurveyTemplate = {};
         return tempState;
+    } else if(action.type === ACTIONS.UPDATE_SURVEY_LIST) {
+        let tempState = {...state};
+        tempState.surveyList.surveys = [...action.surveys];
+        return tempState;
+    } else if(action.type === ACTIONS.CLEAR_SURVEY_LIST) {
+        let tempState = {...state};
+        tempState.surveyList.surveys = [];
+        return tempState;
     }
     return state;
 }

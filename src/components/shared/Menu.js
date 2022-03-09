@@ -15,8 +15,8 @@ const Menu = () => {
                                 </a>
                             </li>
                             <li>
-                                <a href="#layouts">
-                                    <i className="iconsminds-digital-drawing"></i> Pages
+                                <a href="#surveys">
+                                    <i className="iconsminds-pantone"></i> Surveys
                                 </a>
                             </li>
                             <li>
@@ -62,30 +62,24 @@ const Menu = () => {
                                 </a>
                             </li>
                         </ul>
-                        <ul className="list-unstyled" data-link="layouts" id="layouts">
+                        <ul className="list-unstyled" data-link="surveys" id="surveys">
                             <li>
                                 <a href="#" data-toggle="collapse" data-target="#collapseAuthorization" aria-expanded="true"
                                     aria-controls="collapseAuthorization" className="rotate-arrow-icon opacity-50">
-                                    <i className="simple-icon-arrow-down"></i> <span className="d-inline-block">Authorization</span>
+                                    <i className="simple-icon-arrow-down"></i> <span className="d-inline-block">Surveys</span>
                                 </a>
                                 <div id="collapseAuthorization" className="collapse show">
                                     <ul className="list-unstyled inner-level-menu">
                                         <li>
-                                            <a href="#">
-                                                <i className="simple-icon-user-following"></i> <span
-                                                    className="d-inline-block">Login</span>
+                                            <a href="#/surveys">
+                                                <i className="simple-icon-list"></i> <span
+                                                    className="d-inline-block">Survey List</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#">
-                                                <i className="simple-icon-user-follow"></i> <span
-                                                    className="d-inline-block">Register</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i className="simple-icon-user-unfollow"></i> <span className="d-inline-block">Forgot
-                                                    Password</span>
+                                            <a href="#/createsurvey">
+                                                <i className="simple-icon-plus"></i> <span
+                                                    className="d-inline-block">Crete New Survey</span>
                                             </a>
                                         </li>
                                     </ul>
@@ -94,7 +88,7 @@ const Menu = () => {
                             <li>
                                 <a href="#" data-toggle="collapse" data-target="#collapseProduct" aria-expanded="true"
                                     aria-controls="collapseProduct" className="rotate-arrow-icon opacity-50">
-                                    <i className="simple-icon-arrow-down"></i> <span className="d-inline-block">Product</span>
+                                    <i className="simple-icon-arrow-down"></i> <span className="d-inline-block">Details</span>
                                 </a>
                                 <div id="collapseProduct" className="collapse show">
                                     <ul className="list-unstyled inner-level-menu">
@@ -141,87 +135,6 @@ const Menu = () => {
                                                 <i className="simple-icon-link"></i> <span className="d-inline-block">Portfolio</span>
                                             </a>
                                         </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li>
-                                <a href="#" data-toggle="collapse" data-target="#collapseBlog" aria-expanded="true"
-                                    aria-controls="collapseBlog" className="rotate-arrow-icon opacity-50">
-                                    <i className="simple-icon-arrow-down"></i> <span className="d-inline-block">Blog</span>
-                                </a>
-                                <div id="collapseBlog" className="collapse show">
-                                    <ul className="list-unstyled inner-level-menu">
-                                        <li>
-                                            <a href="#">
-                                                <i className="simple-icon-list"></i> <span className="d-inline-block">List</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i className="simple-icon-book-open"></i> <span className="d-inline-block">Detail</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i className="simple-icon-picture"></i> <span className="d-inline-block">Detail
-                                                    Alt</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li>
-                                <a href="#" data-toggle="collapse" data-target="#collapseMisc" aria-expanded="true"
-                                    aria-controls="collapseMisc" className="rotate-arrow-icon opacity-50">
-                                    <i className="simple-icon-arrow-down"></i> <span className="d-inline-block">Miscellaneous</span>
-                                </a>
-                                <div id="collapseMisc" className="collapse show">
-                                    <ul className="list-unstyled inner-level-menu">
-                                        <li>
-                                            <a href="#">
-                                                <i className="simple-icon-hourglass"></i> <span className="d-inline-block">Coming
-                                                    Soon</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i className="simple-icon-exclamation"></i> <span
-                                                    className="d-inline-block">Error</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i className="simple-icon-question"></i> <span className="d-inline-block">Faq</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i className="simple-icon-bag"></i> <span className="d-inline-block">Invoice</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i className="simple-icon-graduation"></i> <span className="d-inline-block">Knowledge
-                                                    Base</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i className="simple-icon-envelope-open"></i> <span
-                                                    className="d-inline-block">Mailing</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i className="simple-icon-diamond"></i> <span className="d-inline-block">Pricing</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i className="simple-icon-magnifier"></i> <span className="d-inline-block">Search</span>
-                                            </a>
-                                        </li>
-
                                     </ul>
                                 </div>
                             </li>

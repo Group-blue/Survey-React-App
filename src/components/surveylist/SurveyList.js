@@ -1,71 +1,47 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllTemplateListRequest, getTemplateDetailsByIdRequest } from "../../api/ApiCalls";
-import { clearTemplatesList, setCurrentTemplate, updateTemplatesList } from "../../redux/actions/TemplateActions";
-import SurveyTemplateCard from "./SurveyTemplateCard";
+import { getAllSurveyListRequest } from "../../api/ApiCalls";
+import { clearSurveyList, setCurrentTemplate, updateSurveyList } from "../../redux/actions/TemplateActions";
+import SurveyCard from "../surveylist/SurveyCard";
 import { useHistory  } from "react-router-dom";
 
-const SurveyTemplateList = () => {
-    const { templatesFromStore } = useSelector(store => ({
-        templatesFromStore: store.surveyTemplateList.templates
+const SurveyList = () => {
+    const { surveysFromStore } = useSelector(store => ({
+        surveysFromStore: store.surveyList.surveys
     }))
 
-    const[templates, setTemplates] = useState(templatesFromStore);
+    const[surveys, setSurveys] = useState(surveysFromStore);
 
     const dispatch = useDispatch();
 
     let history = useHistory();
 
     useEffect(()=>{
-        setTemplates(templatesFromStore);
-    }, [templatesFromStore]);
+        setSurveys(surveysFromStore);
+    }, [surveysFromStore]);
 
     const onClickUpdateList = async () => {
         try{
-            const response = await getAllTemplateListRequest();
-            dispatch(updateTemplatesList(response.data));
+            const response = await getAllSurveyListRequest(); 
+            dispatch(updateSurveyList(response.data));
         } catch(apiError){
             console.log(apiError);
-            dispatch(clearTemplatesList());
+            dispatch(clearSurveyList());
         }
     }
 
     const onClickListItem = async (itemId) => {
         console.log("clicked to.....: "+itemId)
-        try{
-            const result = await getTemplateDetailsByIdRequest(itemId);
-            let currentTemplate = result.data;
-            console.log(currentTemplate);
+        // try{
+        //     const result = await getTemplateDetailsByIdRequest(itemId);
+        //     let currentTemplate = result.data;
+        //     console.log(currentTemplate);
 
-            // bubleSort questions by orderNo
-            for(let j=0;j<currentTemplate.questions.length;j++){
-                for(let i=0;i<currentTemplate.questions.length-1;i++){
-                    if(currentTemplate.questions[i].orderNo > currentTemplate.questions[i+1].orderNo){
-                        let temp = currentTemplate.questions[i];
-                        currentTemplate.questions[i] = currentTemplate.questions[i+1];
-                        currentTemplate.questions[i+1] = temp;
-                    }
-                }
-            }
-
-            // bubleSort answers by orderNo
-            for(let i=0;i<currentTemplate.questions.length;i++){
-                for(let j=0;j<currentTemplate.questions[i].options.length;j++){
-                    for(let k=0;k<currentTemplate.questions[i].options.length-1;k++){
-                        if(currentTemplate.questions[i].options[k].orderNo > currentTemplate.questions[i].options[k+1].orderNo){
-                            let temp = currentTemplate.questions[i].options[k];
-                            currentTemplate.questions[i].options[k] = currentTemplate.questions[i].options[k+1];
-                            currentTemplate.questions[i].options[k+1] = temp;
-                        }
-                    }
-                }
-            }
-
-            dispatch(setCurrentTemplate(currentTemplate));
-            history.push("templatedetails");
-        } catch(apiError) {
-            console.log(apiError);
-        }
+        //     dispatch(setCurrentTemplate(currentTemplate));
+        //     history.push("templatedetails");
+        // } catch(apiError) {
+        //     console.log(apiError);
+        // }
     }
 
     return (
@@ -73,7 +49,7 @@ const SurveyTemplateList = () => {
             <div className="row app-row">
                 <div className="col-12">
                     <div className="mb-2">
-                        <h1>Survey Templates</h1>
+                        <h1>Surveys</h1>
                         <div className="top-right-button-container">
                             <button type="button" className="btn btn-primary btn-lg top-right-button mr-1" onClick={onClickUpdateList}>
                                 <i className="simple-icon-refresh"></i> UPDATE LIST
@@ -232,8 +208,8 @@ const SurveyTemplateList = () => {
 
                     <div className="list disable-text-selection" data-check-all="checkAll">
                         {
-                            templates.map(i=> <SurveyTemplateCard key={i.id} id={i.id} templateName={i.templateName} 
-                                validityStartDate={i.validityStartDate} draft={i.draft} onClickListItem={onClickListItem} />)
+                            surveys.map(i=> <SurveyCard key={i.id} id={i.id} templateId={i.templateId} templateName={i.templateName}
+                                templateExplanation={i.templateExplanation} startDate={i.startDate} endDate={i.endDate} onClickListItem={onClickListItem} />)
                         }
                     </div>
                 </div>
@@ -242,4 +218,4 @@ const SurveyTemplateList = () => {
     );
 };
 
-export default SurveyTemplateList;
+export default SurveyList;

@@ -16,3 +16,7 @@ export const getTemplateDetailsByIdRequest = (id) => {
 export const updateTemplateRequest = (body) => {
     return axios.post(URLS.SURVEY_SVC_URL+URLS.UPDATE_SURVEY_TEMPLATE, body);
 }
+
+export const getAllSurveyListRequest = () => {
+    return axios.get(URLS.SURVEY_SVC_URL+URLS.LIST_ALL_SURVEY);
+}

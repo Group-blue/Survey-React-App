@@ -1,13 +1,12 @@
-import {convertTimestampToDate} from "../../sharedmethods/DateTimeOperations"
 
-const SurveyCard = (props) => {
-    const { id, templateId, templateName, templateExplanation, startDate, endDate, onClickListItem } = props;
+const SurveyTemplateCard = (props) => {
+    const { id, templateName, validityStartDate, draft, onClickListItem } = props;
 
-    // const convertTimestampToDate = (timestamp) => {
-    //     let date = new Intl.DateTimeFormat('tr-TR', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' })
-    //     .format(timestamp);
-    //     return date;
-    // }
+    const convertTimestampToDate = (timestamp) => {
+        let date = new Intl.DateTimeFormat('tr-TR', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' })
+        .format(timestamp);
+        return date;
+    }
 
     const onClickItem = () => {
         onClickListItem(id);
@@ -24,11 +23,10 @@ const SurveyCard = (props) => {
                             <i className="simple-icon-refresh heading-icon"></i>
                             <span className="align-middle d-inline-block">{templateName}</span>
                         </a>
-                        <p className="mb-0 text-muted text-small w-15 w-xs-100">{templateExplanation}</p>
-                        <p className="mb-0 text-muted text-small w-15 w-xs-100">{convertTimestampToDate(startDate)}</p>
-                        <p className="mb-0 text-muted text-small w-15 w-xs-100">{convertTimestampToDate(endDate)}</p>
+                        <p className="mb-0 text-muted text-small w-15 w-xs-100">Personal</p>
+                        <p className="mb-0 text-muted text-small w-15 w-xs-100">{convertTimestampToDate(validityStartDate)}</p>
                         <div className="w-15 w-xs-100">
-                            <span className="badge badge-pill badge-secondary">{"Template Id: "+templateId}</span>
+                            <span className="badge badge-pill badge-secondary">{draft ? "Approved":"Draft"}</span>
                         </div>
                     </div>
                     <label className="custom-control custom-checkbox mb-1 align-self-center mr-4">
@@ -41,4 +39,4 @@ const SurveyCard = (props) => {
     );
 };
 
-export default SurveyCard;
+export default SurveyTemplateCard;
