@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { clearTemplate, saveTemplate } from "../../redux/actions/TemplateActions";
-import SingleQuestion from "../questions/SingleQuestion";
-import { saveTemplateRequest } from '../../api/ApiCalls';
+import SingleQuestionDetail from "../surveytemplatedetails/SingleQuestionDetail";
+import { updateTemplateRequest } from '../../api/ApiCalls';
 
-const SurveyBody = () => {
+const SurveyTemplateDetails = () => {
 
-    const{templateNameFromStore, explanationFromStore, questionsFromStore} = useSelector(store => ({
-        templateNameFromStore: store.createSurveyTemplate.templateName,
-        explanationFromStore: store.createSurveyTemplate.explanation,
-        questionsFromStore: store.createSurveyTemplate.questions
+    const{id, templateNameFromStore, explanationFromStore, questionsFromStore} = useSelector(store => ({
+        templateNameFromStore: store.currentSurveyTemplate.templateName,
+        explanationFromStore: store.currentSurveyTemplate.explanation,
+        questionsFromStore: store.currentSurveyTemplate.questions,
+        id: store.currentSurveyTemplate.id
     }));
 
     const [questions, setQuestions] = useState(questionsFromStore);
@@ -27,6 +27,7 @@ const SurveyBody = () => {
     const addQuestion = () => {
         const newQuestion = {
             orderNo: questions.length < 1 ? 1 : questions[questions.length-1].orderNo+1,
+            id: undefined,
             title: undefined,
             text: undefined,
             type: 1,
@@ -51,30 +52,9 @@ const SurveyBody = () => {
         setQuestions(tempQuestions);
     }
 
-    const onClickSaveToBrowser = () => {
+   const sendUpdateTemplateRequest = async () => {
         const template = {
-            isDraft: true,
-            templateName,
-            explanation,
-            questions
-        }
-
-        dispatch(saveTemplate(template));
-    }
-
-    const onClickClearBrowserCash = () => {
-        const template = {
-            isDraft: true,
-            templateName: undefined,
-            explanation: undefined,
-            questions: []
-        }
-
-        dispatch(clearTemplate(template));
-    }
-
-   const sendSaveTemplateRequest = async () => {
-        const template = {
+            id,
             isDraft: true,
             templateName,
             explanation,
@@ -82,7 +62,8 @@ const SurveyBody = () => {
         }
 
         try{
-            const apiResponse = await saveTemplateRequest(template);
+            const apiResponse = await updateTemplateRequest(template);
+            console.log(apiResponse);
         } catch (apiError) {
             console.log(apiError);
         }
@@ -101,9 +82,7 @@ const SurveyBody = () => {
                                 SAVE ACTIONS
                             </button>
                             <div className="dropdown-menu dropdown-menu-right">
-                                <a className="dropdown-item" href="#" onClick={onClickSaveToBrowser}>Save to Browser Cash</a>
-                                <a className="dropdown-item" href="#" onClick={onClickClearBrowserCash}>Clear Browser Cash</a>
-                                <a className="dropdown-item" href="#" onClick={sendSaveTemplateRequest}>Save to Database</a>
+                                <a className="dropdown-item" href="#" onClick={sendUpdateTemplateRequest}>Save to Database</a>
                             </div>
                         </div>
                     </div>
@@ -131,13 +110,6 @@ const SurveyBody = () => {
                                             <p className="text-muted text-small mb-2">Explanation</p>
                                             <textarea className="mb-3 form-control" rows="3" placeholder="Enter Template Explanation"
                                             onChange={(event)=>setExplanation(event.target.value)} defaultValue={explanation} />
-
-
-                                            <div className="text-center">
-                                            <button type="button"
-                                                className="btn btn-outline-primary btn-sm mb-2">
-                                                Save</button>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -146,9 +118,8 @@ const SurveyBody = () => {
                                     <div className="sortable-survey">
                                         <div>
                                             {
-                                                questions.map(i=> <SingleQuestion key={i.orderNo} orderNo={i.orderNo} onClickRemove={onClickRemoveQuestion} 
-                                                                    title={i.title} text={i.text} 
-                                                                    type={i.type} options={i.options}
+                                                questions.map(i=> <SingleQuestionDetail key={i.orderNo} orderNo={i.orderNo} onClickRemove={onClickRemoveQuestion} 
+                                                                    title={i.title} text={i.text} type={i.type} options={i.options} id={i.id}
                                                                     onQuestionChanged={onQuestionChanged} />)
                                             }
                                         </div>
@@ -170,4 +141,4 @@ const SurveyBody = () => {
     );
 };
 
-export default SurveyBody;
+export default SurveyTemplateDetails;

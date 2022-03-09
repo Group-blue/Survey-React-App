@@ -1,6 +1,6 @@
 import React from 'react';
 
-const EditOption = (props) => {
+const SingleSelectOption = (props) => {
     const{ onClickRemove, orderNo, description, onChangeDescription } = props; 
 
     const clickRemove = () => {
@@ -25,4 +25,4 @@ const EditOption = (props) => {
     );
 };
 
-export default EditOption;
+export default SingleSelectOption;

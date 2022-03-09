@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Menu = () => {
     return (
@@ -51,7 +52,7 @@ const Menu = () => {
                     <div className="scroll">
                         <ul className="list-unstyled" data-link="templates">
                             <li>
-                                <a href="#">
+                                <a href="#/">
                                     <i className="iconsminds-box-with-folders"></i> <span className="d-inline-block">Template List</span>
                                 </a>
                             </li>

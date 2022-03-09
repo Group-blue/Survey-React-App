@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllTemplateListRequest } from "../../api/ApiCalls";
-import { clearTemplatesList, updateTemplatesList } from "../../redux/actions/TemplateActions";
+import { getAllTemplateListRequest, getTemplateDetailsByIdRequest } from "../../api/ApiCalls";
+import { clearTemplatesList, setCurrentTemplate, updateTemplatesList } from "../../redux/actions/TemplateActions";
 import SurveyCard from "../surveylist/SurveyCard";
+import { useHistory  } from "react-router-dom";
 
-const SurveyList = () => {
+const SurveyTemplateList = () => {
     const { templatesFromStore } = useSelector(store => ({
         templatesFromStore: store.surveyTemplateList.templates
     }))
@@ -12,6 +13,8 @@ const SurveyList = () => {
     const[templates, setTemplates] = useState(templatesFromStore);
 
     const dispatch = useDispatch();
+
+    let history = useHistory();
 
     useEffect(()=>{
         setTemplates(templatesFromStore);
@@ -27,9 +30,42 @@ const SurveyList = () => {
         }
     }
 
-    const onClickListItem = (itemId) => {
-        // send request to backend get details about itemId than push to details page
+    const onClickListItem = async (itemId) => {
         console.log("clicked to.....: "+itemId)
+        try{
+            const result = await getTemplateDetailsByIdRequest(itemId);
+            let currentTemplate = result.data;
+            console.log(currentTemplate);
+
+            // bubleSort questions by orderNo
+            for(let j=0;j<currentTemplate.questions.length;j++){
+                for(let i=0;i<currentTemplate.questions.length-1;i++){
+                    if(currentTemplate.questions[i].orderNo > currentTemplate.questions[i+1].orderNo){
+                        let temp = currentTemplate.questions[i];
+                        currentTemplate.questions[i] = currentTemplate.questions[i+1];
+                        currentTemplate.questions[i+1] = temp;
+                    }
+                }
+            }
+
+            // bubleSort answers by orderNo
+            for(let i=0;i<currentTemplate.questions.length;i++){
+                for(let j=0;j<currentTemplate.questions[i].options.length;j++){
+                    for(let k=0;k<currentTemplate.questions[i].options.length-1;k++){
+                        if(currentTemplate.questions[i].options[k].orderNo > currentTemplate.questions[i].options[k+1].orderNo){
+                            let temp = currentTemplate.questions[i].options[k];
+                            currentTemplate.questions[i].options[k] = currentTemplate.questions[i].options[k+1];
+                            currentTemplate.questions[i].options[k+1] = temp;
+                        }
+                    }
+                }
+            }
+
+            dispatch(setCurrentTemplate(currentTemplate));
+            history.push("templatedetails");
+        } catch(apiError) {
+            console.log(apiError);
+        }
     }
 
     return (
@@ -206,4 +242,4 @@ const SurveyList = () => {
     );
 };
 
-export default SurveyList;
+export default SurveyTemplateList;

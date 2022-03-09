@@ -2,29 +2,32 @@ import Navbar from '../components/shared/Navbar';
 import Menu from '../components/shared/Menu';
 import Footer from '../components/shared/Footer';
 import AppMenu from '../components/shared/AppMenu';
-import SurveyBody from '../components/surveytemplate/SurveyBody';
-import SurveyList from '../components/surveytemplate/SurveyList';
-import { HashRouter as Router, Route, Routes } from 'react-router-dom';
+import SurveyTemplateBody from '../components/surveytemplate/SurveyTemplateBody';
+import SurveyTemplateList from '../components/surveytemplate/SurveyTemplateList';
+import { HashRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
+import SurveyTemplateDetails from '../components/surveytemplate/SurveyTemplateDetails';
 
 function App() {
   return (
     <div>
-      <Navbar/>
-      <Menu/>
-      <main>
-        <div>
+        <Navbar/>
+        <Menu/>
+        <main>
+          <div>
 
-          <Router>
-            <Routes>
-              <Route exact path="/" element={<SurveyList/>} />
-              <Route exact path="/createtemplate" element={<SurveyBody/>} />              
-            </Routes>
-          </Router>
-          
-          <AppMenu/>
-        </div>
-      </main>
-      <Footer/>
+      <Router>
+              <Switch>
+                <Route exact path="/" component={SurveyTemplateList} />
+                <Route path="/createtemplate" component={SurveyTemplateBody} />
+                <Route path="/templatedetails" component={SurveyTemplateDetails} />
+                <Redirect to="/" />              
+              </Switch>
+            
+            <AppMenu/>
+      </Router>
+          </div>
+        </main>
+        <Footer/>
     </div>
   );
 }

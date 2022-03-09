@@ -26,3 +26,16 @@ export const clearTemplatesList = () => {
         type: ACTIONS.CLEAR_TEMPLATES_LIST
     };
 };
+
+export const setCurrentTemplate = (template) => {
+    return {
+        type: ACTIONS.SET_CURRENT_TEMPLATE,
+        template
+    };
+};
+
+export const clearCurrentTemplate = () => {
+    return {
+        type: ACTIONS.CLEAR_CURRENT_TEMPLATE
+    };
+};
