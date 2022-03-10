@@ -1,16 +1,23 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllSurveyListRequest } from "../../api/ApiCalls";
-import { clearSurveyList, setCurrentTemplate, updateSurveyList } from "../../redux/actions/TemplateActions";
+import { getAllSurveyListRequest, getAllTemplateListRequest, saveSurveyRequest } from "../../api/ApiCalls";
+import { clearSurveyList, updateSurveyList, updateTemplatesList, clearTemplatesList } from "../../redux/actions/TemplateActions";
 import SurveyCard from "../surveylist/SurveyCard";
 import { useHistory  } from "react-router-dom";
+import { getCurrentDate, convertDateToTimestamp } from "../../sharedmethods/DateTimeOperations";
 
 const SurveyList = () => {
-    const { surveysFromStore } = useSelector(store => ({
-        surveysFromStore: store.surveyList.surveys
+    const { surveysFromStore, templatesFromStore } = useSelector(store => ({
+        surveysFromStore: store.surveyList.surveys,
+        templatesFromStore: store.surveyTemplateList.templates
     }))
 
     const[surveys, setSurveys] = useState(surveysFromStore);
+    const[templates, setTemplates] = useState(templatesFromStore);
+    const[selectedTemplate, setSelectedTemplate] = useState();
+    const[selectedCourse, setSelectedCourse] = useState("0");
+    const[selectedStartDate, setSelectedStartDate] = useState(convertDateToTimestamp(getCurrentDate()));
+    const[selectedEndDate, setSelectedEndDate ] = useState(convertDateToTimestamp(getCurrentDate()));
 
     const dispatch = useDispatch();
 
@@ -19,6 +26,10 @@ const SurveyList = () => {
     useEffect(()=>{
         setSurveys(surveysFromStore);
     }, [surveysFromStore]);
+
+    useEffect(()=>{
+        setTemplates(templatesFromStore);
+    }, [templatesFromStore]);
 
     const onClickUpdateList = async () => {
         try{
@@ -44,6 +55,34 @@ const SurveyList = () => {
         // }
     }
 
+    const onClickUpdateTemplates = async () => {
+        try{
+            const response = await getAllTemplateListRequest();
+            dispatch(updateTemplatesList(response.data));
+        } catch(apiError){
+            console.log(apiError);
+            dispatch(clearTemplatesList());
+        }
+    }
+
+    const onClickCreateNewSurvey = async () => {
+        const body = {
+            startdate: selectedStartDate,
+            endDate: selectedEndDate,
+            couseId: selectedCourse,
+            templateId: selectedTemplate
+        }
+
+        try{
+            const apiResult = await saveSurveyRequest(body);
+            console.log(apiResult);
+        } catch(apiError) {
+            console.log(apiError);
+        }
+
+        history.push("surveys");
+    }
+
     return (
         <div className="container-fluid">
             <div className="row app-row">
@@ -56,7 +95,7 @@ const SurveyList = () => {
                             </button>
                             <button type="button" className="btn btn-primary btn-lg top-right-button mr-1"
                                 data-toggle="modal" data-backdrop="static" data-target="#exampleModalRight">
-                                    ADD NEW
+                                    ADD SURVEY
                             </button>
 
                             <div className="modal fade modal-right" id="exampleModalRight" tabIndex="-1" role="dialog"
@@ -64,7 +103,7 @@ const SurveyList = () => {
                                 <div className="modal-dialog" role="document">
                                     <div className="modal-content">
                                         <div className="modal-header">
-                                            <h5 className="modal-title">Add New</h5>
+                                            <h5 className="modal-title">Add Survey</h5>
                                             <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
@@ -72,31 +111,54 @@ const SurveyList = () => {
                                         <div className="modal-body">
                                             <form>
                                                 <div className="form-group">
-                                                    <label>Title</label>
-                                                    <input type="text" className="form-control" placeholder=""/>
-                                                </div>
-                                                <div className="form-group">
-                                                    <label>Details</label>
-                                                    <textarea placeholder="" className="form-control" rows="2"></textarea>
+                                                    <label>From Template ?</label>
+                                                    <div className="row">
+                                                        <div className="col-md-9">
+                                                            <select className="form-control" onChange={(event)=>setSelectedTemplate(event.target.value)}>
+                                                                <option label="&nbsp;" disabled>&nbsp;</option>
+                                                                {
+                                                                    templates.map(i=> <option key={i.id} value={i.id}>{i.templateName}</option>)
+                                                                }
+                                                            </select>
+                                                        </div>
+                                                        <div className="col-md-2">
+                                                            <button type="button" className="btn btn-outline-primary btn-sm mb-2" onClick={onClickUpdateTemplates}>
+                                                                <i className="simple-icon-refresh"></i>
+                                                            </button>
+                                                        </div>                                                        
+                                                    </div>
                                                 </div>
 
                                                 <div className="form-group">
-                                                    <label>Category</label>
-                                                    <select className="form-control">
-                                                        <option label="&nbsp;">&nbsp;</option>
-                                                        <option value="Flexbox">Flexbox</option>
-                                                        <option value="Sass">Sass</option>
-                                                        <option value="React">React</option>
-                                                    </select>
+                                                    <label>For Course ?</label>
+                                                    <div className="row">
+                                                        <div className="col-md-9">
+                                                            <select className="form-control" onChange={(event)=>setSelectedCourse(event.target.value)} >
+                                                                <option label="&nbsp;" disabled>&nbsp;</option>
+                                                            </select>
+                                                        </div>
+                                                        <div className="col-md-2">
+                                                            <button type="button" className="btn btn-outline-primary btn-sm mb-2">
+                                                                <i className="simple-icon-refresh"></i>
+                                                            </button>
+                                                        </div>                                                        
+                                                    </div>
                                                 </div>
 
                                                 <div className="form-group">
-                                                    <label>Status</label>
-                                                    <div className="custom-control custom-checkbox">
-                                                        <input type="checkbox" className="custom-control-input"
-                                                            id="customCheck1"/>
-                                                        <label className="custom-control-label"
-                                                            htmlFor="customCheck1">Completed</label>
+                                                    <div className="row">
+                                                        <div className="col-md-6">
+                                                            <label>Start Date</label>
+                                                            <input type="date" className="form-control" defaultValue={getCurrentDate()} min={getCurrentDate()}
+                                                             onChange={(event)=>setSelectedStartDate(convertDateToTimestamp(event.target.value))}
+                                                              />
+                                                        </div>
+                                                        <div className="col-md-6">
+                                                            <label>End Date</label>
+                                                            <input type="date" className="form-control" defaultValue={getCurrentDate()} min={getCurrentDate()}
+                                                            onChange={(event)=>setSelectedEndDate(convertDateToTimestamp(event.target.value))}
+                                                             />
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </form>
@@ -104,7 +166,7 @@ const SurveyList = () => {
                                         <div className="modal-footer">
                                             <button type="button" className="btn btn-outline-primary"
                                                 data-dismiss="modal">Cancel</button>
-                                            <button type="button" className="btn btn-primary">Submit</button>
+                                            <button type="button" className="btn btn-primary" onClick={onClickCreateNewSurvey} >Submit</button>
                                         </div>
                                     </div>
                                 </div>

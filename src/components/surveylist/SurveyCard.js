@@ -13,14 +13,18 @@ const SurveyCard = (props) => {
         onClickListItem(id);
     }
 
+    const onChangeCheckBox = () => {
+        console.log("checkbox tiklendi");
+    }
+
     return (
         <div>
             <div className="card d-flex flex-row mb-3">
                 <div className="d-flex flex-grow-1 min-width-zero">
                     <div
                         className="card-body align-self-center d-flex flex-column flex-md-row justify-content-between min-width-zero align-items-md-center">
-                        <a className="list-item-heading mb-0 truncate w-40 w-xs-100 mt-0"
-                            href="#" onClick={onClickItem} >
+                        <a className="list-item-heading mb-0 truncate w-40 w-xs-100 mt-0" style={{cursor: "pointer"}}
+                             onClick={onClickItem} >
                             <i className="simple-icon-refresh heading-icon"></i>
                             <span className="align-middle d-inline-block">{templateName}</span>
                         </a>
@@ -32,7 +36,7 @@ const SurveyCard = (props) => {
                         </div>
                     </div>
                     <label className="custom-control custom-checkbox mb-1 align-self-center mr-4">
-                        <input type="checkbox" className="custom-control-input"/>
+                        <input type="checkbox" className="custom-control-input" onChange={(event)=>console.log(event)} />
                         <span className="custom-control-label">&nbsp;</span>
                     </label>
                 </div>

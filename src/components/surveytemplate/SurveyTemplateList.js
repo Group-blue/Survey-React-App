@@ -78,61 +78,7 @@ const SurveyTemplateList = () => {
                             <button type="button" className="btn btn-primary btn-lg top-right-button mr-1" onClick={onClickUpdateList}>
                                 <i className="simple-icon-refresh"></i> UPDATE LIST
                             </button>
-                            <button type="button" className="btn btn-primary btn-lg top-right-button mr-1"
-                                data-toggle="modal" data-backdrop="static" data-target="#exampleModalRight">
-                                    ADD NEW
-                            </button>
 
-                            <div className="modal fade modal-right" id="exampleModalRight" tabIndex="-1" role="dialog"
-                                aria-labelledby="exampleModalRight" aria-hidden="true">
-                                <div className="modal-dialog" role="document">
-                                    <div className="modal-content">
-                                        <div className="modal-header">
-                                            <h5 className="modal-title">Add New</h5>
-                                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div className="modal-body">
-                                            <form>
-                                                <div className="form-group">
-                                                    <label>Title</label>
-                                                    <input type="text" className="form-control" placeholder=""/>
-                                                </div>
-                                                <div className="form-group">
-                                                    <label>Details</label>
-                                                    <textarea placeholder="" className="form-control" rows="2"></textarea>
-                                                </div>
-
-                                                <div className="form-group">
-                                                    <label>Category</label>
-                                                    <select className="form-control">
-                                                        <option label="&nbsp;">&nbsp;</option>
-                                                        <option value="Flexbox">Flexbox</option>
-                                                        <option value="Sass">Sass</option>
-                                                        <option value="React">React</option>
-                                                    </select>
-                                                </div>
-
-                                                <div className="form-group">
-                                                    <label>Status</label>
-                                                    <div className="custom-control custom-checkbox">
-                                                        <input type="checkbox" className="custom-control-input"
-                                                            id="customCheck1"/>
-                                                        <label className="custom-control-label"
-                                                            htmlFor="customCheck1">Completed</label>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <div className="modal-footer">
-                                            <button type="button" className="btn btn-outline-primary"
-                                                data-dismiss="modal">Cancel</button>
-                                            <button type="button" className="btn btn-primary">Submit</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             <div className="btn-group">
                                 <div className="btn btn-primary btn-lg pl-4 pr-0 check-button">
                                     <label className="custom-control custom-checkbox mb-0 d-inline-block">
