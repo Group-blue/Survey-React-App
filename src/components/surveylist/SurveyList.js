@@ -67,7 +67,7 @@ const SurveyList = () => {
 
     const onClickCreateNewSurvey = async () => {
         const body = {
-            startdate: selectedStartDate,
+            startDate: selectedStartDate,
             endDate: selectedEndDate,
             couseId: selectedCourse,
             templateId: selectedTemplate
