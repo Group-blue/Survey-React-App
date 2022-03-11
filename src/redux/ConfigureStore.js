@@ -20,6 +20,8 @@ const updateStateInStorage = newState => {
 
 export const getDefaultState = () => {
     let defaultState = {
+        loggedIn: false,
+        userCredentials:{},
         createSurveyTemplate: {
             isDraft: true,
             templateName: undefined,

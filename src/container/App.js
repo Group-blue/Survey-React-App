@@ -1,35 +1,17 @@
-import Navbar from '../components/shared/Navbar';
-import Menu from '../components/shared/Menu';
-import Footer from '../components/shared/Footer';
-import AppMenu from '../components/shared/AppMenu';
-import SurveyTemplateBody from '../components/surveytemplate/SurveyTemplateBody';
-import SurveyTemplateList from '../components/surveytemplate/SurveyTemplateList';
-import { HashRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
-import SurveyTemplateDetails from '../components/surveytemplate/SurveyTemplateDetails';
-import SurveyList from '../components/surveylist/SurveyList';
+import { useSelector } from 'react-redux';
+import LoginPage from '../pages/LoginPage';
+import ManagerPage from '../pages/ManagerPage';
 
-function App() {
+const App = () => {
+
+  const { loggedIn } = useSelector(store => ({
+    loggedIn: store.loggedIn
+  }))
+
+
   return (
     <div>
-        <Navbar/>
-        <Menu/>
-        <main>
-          <div>
-
-      <Router>
-              <Switch>
-                <Route exact path="/" component={SurveyTemplateList} />
-                <Route path="/createtemplate" component={SurveyTemplateBody} />
-                <Route path="/templatedetails" component={SurveyTemplateDetails} />
-                <Route path="/surveys" component={SurveyList} />
-                <Redirect to="/" />              
-              </Switch>
-            
-            <AppMenu/>
-      </Router>
-          </div>
-        </main>
-        <Footer/>
+        {loggedIn ? <ManagerPage/> : <LoginPage/>}
     </div>
   );
 }
