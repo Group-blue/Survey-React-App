@@ -34,7 +34,12 @@ const TemplateReducer = (state = {...getDefaultState}, action) => {
         let tempState = {...state};
         tempState.surveyList.surveys = [];
         return tempState;
-    }
+    } else if(action.type === ACTIONS.USER_LOGGEDIN) {
+        let tempState = {...state};
+        tempState.loggedIn = true;
+        tempState.userCredentials.token = action.token;
+        return tempState;
+    } 
     return state;
 }
 

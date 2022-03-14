@@ -25,3 +25,11 @@ export const getAllSurveyListRequest = () => {
 export const saveSurveyRequest = (body) => {
     return axios.post(URLS.SURVEY_SVC_URL+URLS.SAVE_SURVEY, body);
 }
+
+export const loginRequest = (body) => {
+    return axios.post(URLS.USER_SVC_URL+URLS.LOGIN, body);
+}
+
+export const setToken = (token) => {
+    axios.defaults.headers['Authorization'] = 'Bearer ' + token;
+}

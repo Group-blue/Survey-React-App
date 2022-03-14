@@ -8,3 +8,5 @@ export const CLEAR_CURRENT_TEMPLATE = 'clear-current-template';
 
 export const UPDATE_SURVEY_LIST = 'update-survey-list';
 export const CLEAR_SURVEY_LIST = 'clear-survey-list';
+
+export const USER_LOGGEDIN = 'user-loggedin';

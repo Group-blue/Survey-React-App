@@ -53,3 +53,10 @@ export const clearSurveyList = () => {
         type: ACTIONS.CLEAR_SURVEY_LIST
     };
 };
+
+export const userLoggedIn = (token) => {
+    return {
+        type: ACTIONS.USER_LOGGEDIN,
+        token
+    };
+};
