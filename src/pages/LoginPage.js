@@ -6,11 +6,13 @@ import { userLoggedIn } from '../redux/actions/TemplateActions';
 const LoginPage = () => {
     const[email, setEmail] = useState();
     const[password, setPassword] = useState();
+    const[apiProgress, setApiProgress] = useState(false);
 
     const dispatch = useDispatch();
 
     const onClickLogin = async (event) => {
         event.preventDefault();
+        setApiProgress(true);
 
         let body = {
             email,
@@ -23,9 +25,11 @@ const LoginPage = () => {
                 setToken(token);
                 dispatch(userLoggedIn(token));
             }
+            
         } catch(apiError) {
             console.log(apiError);
         }
+        setApiProgress(false);
     }
 
     return (
@@ -52,7 +56,7 @@ const LoginPage = () => {
                                         <h6 className="mb-4">Login</h6>
                                         <form>
                                             <label className="form-group has-float-label mb-4">
-                                                <input className="form-control" onChange={(event)=>setEmail(event.target.value)}/>
+                                                <input className="form-control" type="email" onChange={(event)=>setEmail(event.target.value)}/>
                                                 <span>E-mail</span>
                                             </label>
 
@@ -62,7 +66,9 @@ const LoginPage = () => {
                                             </label>
                                             <div className="d-flex justify-content-between align-items-center">
                                                 <a style={{cursor: "pointer"}}>Forget password?</a>
-                                                <button className="btn btn-primary btn-lg btn-shadow" type="submit" onClick={onClickLogin}>LOGIN</button>
+                                                <button disabled={apiProgress} className="btn btn-primary btn-lg btn-shadow" type="submit" onClick={onClickLogin}>
+                                                    <div hidden={!apiProgress} className="spinner-border spinner-border-sm"></div> LOGIN
+                                                </button>
                                             </div>
                                         </form>
                                     </div>

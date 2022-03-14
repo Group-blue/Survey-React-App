@@ -39,7 +39,12 @@ const TemplateReducer = (state = {...getDefaultState}, action) => {
         tempState.loggedIn = true;
         tempState.userCredentials.token = action.token;
         return tempState;
-    } 
+    } else if(action.type === ACTIONS.USER_LOGGEDOUT) {
+        let tempState = {...state};
+        tempState.loggedIn = false;
+        tempState.userCredentials.token = "";
+        return tempState;
+    }
     return state;
 }
 

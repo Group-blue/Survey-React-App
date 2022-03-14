@@ -60,3 +60,9 @@ export const userLoggedIn = (token) => {
         token
     };
 };
+
+export const userLoggedOut = () => {
+    return {
+        type: ACTIONS.USER_LOGGEDOUT
+    };
+};
