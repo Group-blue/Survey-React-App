@@ -106,7 +106,6 @@ const SingleQuestionDetail = (props) => {
                                 <select className="form-control select2-single" defaultValue={optionType} onChange={(event) => setOptionType(parseInt(event.target.value))} data-width="100%">
                                     <option value="1">Single Select</option>
                                     <option value="2">Checkbox</option>
-                                    <option value="3">Radiobutton</option>
                                     <option value="4">Text Input</option>
                                 </select>
                             </div>
@@ -140,10 +139,6 @@ const SingleQuestionDetail = (props) => {
                                 case 2:
                                     return (
                                         <CheckBoxViewOptions options={options} />
-                                    )
-                                case 3:
-                                    return (
-                                        <RadioButtonViewOptions options={options} />
                                     )
                                 default:
                                     return (

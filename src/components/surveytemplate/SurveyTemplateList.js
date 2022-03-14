@@ -92,59 +92,8 @@ const SurveyTemplateList = () => {
                                     <span className="sr-only">Toggle Dropdown</span>
                                 </button>
                                 <div className="dropdown-menu dropdown-menu-right">
-                                    <a className="dropdown-item" href="#">Action</a>
-                                    <a className="dropdown-item" href="#">Another action</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="modal fade modal-right" id="exampleModal" tabIndex="-1" role="dialog"
-                            aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div className="modal-dialog" role="document">
-                                <div className="modal-content">
-                                    <div className="modal-header">
-                                        <h5 className="modal-title" id="exampleModalLabel">Add New</h5>
-                                        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div className="modal-body">
-                                        <form>
-                                            <div className="form-group">
-                                                <label>Title</label>
-                                                <input type="text" className="form-control" placeholder="Enter title"/>
-                                            </div>
-                                            <div className="form-group">
-                                                <label>Details</label>
-                                                <textarea className="form-control" rows="2" placeholder="Enter details"/>
-                                            </div>
-
-                                            <div className="form-group">
-                                                <label>Category</label>
-                                                <select className="form-control select2-single" data-width="100%">
-                                                    <option label="&nbsp;">&nbsp;</option>
-                                                    <option value="Flexbox">Flexbox</option>
-                                                    <option value="Sass">Sass</option>
-                                                    <option value="React">React</option>
-                                                </select>
-                                            </div>
-
-                                            <div className="form-group">
-                                                <label>Status</label>
-                                                <div className="custom-control custom-checkbox">
-                                                    <input type="checkbox" className="custom-control-input"
-                                                        id="customCheck1"/>
-                                                    <label className="custom-control-label"
-                                                        htmlFor="customCheck1">Completed</label>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div className="modal-footer">
-                                        <button type="button" className="btn btn-outline-primary"
-                                            data-dismiss="modal">Cancel</button>
-                                        <button type="button" className="btn btn-primary">Submit</button>
-                                    </div>
+                                    <a className="dropdown-item" style={{cursor:"pointer"}}>Action</a>
+                                    <a className="dropdown-item" style={{cursor:"pointer"}}>Another action</a>
                                 </div>
                             </div>
                         </div>
@@ -164,8 +113,8 @@ const SurveyTemplateList = () => {
                                         Order By
                                     </button>
                                     <div className="dropdown-menu">
-                                        <a className="dropdown-item" href="#">Action</a>
-                                        <a className="dropdown-item" href="#">Another action</a>
+                                        <a className="dropdown-item" style={{cursor:"pointer"}}>Action</a>
+                                        <a className="dropdown-item" style={{cursor:"pointer"}}>Another action</a>
                                     </div>
                                 </div>
                                 <div className="search-sm d-inline-block float-md-left mr-1 mb-1 align-top">

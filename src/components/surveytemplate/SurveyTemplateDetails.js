@@ -82,7 +82,7 @@ const SurveyTemplateDetails = () => {
                                 SAVE ACTIONS
                             </button>
                             <div className="dropdown-menu dropdown-menu-right">
-                                <a className="dropdown-item" href="#" onClick={sendUpdateTemplateRequest}>Save to Database</a>
+                                <a className="dropdown-item" style={{cursor:"pointer"}} onClick={sendUpdateTemplateRequest}>Save to Database</a>
                             </div>
                         </div>
                     </div>

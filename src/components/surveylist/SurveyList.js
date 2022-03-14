@@ -80,7 +80,7 @@ const SurveyList = () => {
             console.log(apiError);
         }
 
-        history.push("surveys");
+        window.location.reload(false);
     }
 
     return (

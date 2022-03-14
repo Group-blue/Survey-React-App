@@ -101,9 +101,9 @@ const SurveyTemplateBody = () => {
                                 SAVE ACTIONS
                             </button>
                             <div className="dropdown-menu dropdown-menu-right">
-                                <a className="dropdown-item" href="#" onClick={onClickSaveToBrowser}>Save to Browser Cash</a>
-                                <a className="dropdown-item" href="#" onClick={onClickClearBrowserCash}>Clear Browser Cash</a>
-                                <a className="dropdown-item" href="#" onClick={sendSaveTemplateRequest}>Save to Database</a>
+                                <a className="dropdown-item" style={{cursor: "pointer"}} onClick={onClickSaveToBrowser}>Save to Browser Cash</a>
+                                <a className="dropdown-item" style={{cursor: "pointer"}} onClick={onClickClearBrowserCash}>Clear Browser Cash</a>
+                                <a className="dropdown-item" style={{cursor: "pointer"}} onClick={sendSaveTemplateRequest}>Save to Database</a>
                             </div>
                         </div>
                     </div>
