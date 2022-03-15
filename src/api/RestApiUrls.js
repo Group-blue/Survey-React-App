@@ -1,5 +1,5 @@
-export const SURVEY_SVC_URL = 'http://18.223.214.79:8091';
-export const USER_SVC_URL = 'http://18.223.214.79:8090';
+export const SURVEY_SVC_URL = 'http://13.38.115.223:8091';
+export const USER_SVC_URL = 'http://13.38.115.223:8090';
 
 
 export const SAVE_SURVEY_TEMPLATE = '/surveytemplate/save';

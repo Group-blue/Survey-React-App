@@ -31,11 +31,9 @@ const SurveyTemplateList = () => {
     }
 
     const onClickListItem = async (itemId) => {
-        console.log("clicked to.....: "+itemId)
         try{
             const result = await getTemplateDetailsByIdRequest(itemId);
             let currentTemplate = result.data;
-            console.log(currentTemplate);
 
             // bubleSort questions by orderNo
             for(let j=0;j<currentTemplate.questions.length;j++){

@@ -2,6 +2,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import TemplateReducer from './reducers/TemplateReducer';
 import SecureLS from 'secure-ls';
+import { setToken } from '../api/ApiCalls';
 
 const secureLs = new SecureLS();
 
@@ -66,7 +67,10 @@ export const getDefaultState = () => {
 
 export const ConfigureStore = () => {
     const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-    const store = createStore(TemplateReducer, getStateFromStorage(), composeEnhancers(applyMiddleware(thunk)));
+    const stateFromStorage = getStateFromStorage();
+    const store = createStore(TemplateReducer, stateFromStorage, composeEnhancers(applyMiddleware(thunk)));
+
+    setToken(stateFromStorage.userCredentials.token);
 
     store.subscribe(() => {
         updateStateInStorage(store.getState());
