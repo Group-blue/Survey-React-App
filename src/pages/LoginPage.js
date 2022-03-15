@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { loginRequest, setToken } from '../api/ApiCalls';
 import { userLoggedIn } from '../redux/actions/TemplateActions';
+import { useHistory  } from "react-router-dom";
 
 const LoginPage = () => {
     const[email, setEmail] = useState();
@@ -9,6 +10,8 @@ const LoginPage = () => {
     const[apiProgress, setApiProgress] = useState(false);
 
     const dispatch = useDispatch();
+
+    let history = useHistory();
 
     const onClickLogin = async (event) => {
         event.preventDefault();
@@ -24,8 +27,8 @@ const LoginPage = () => {
                 const token = response.data.token;
                 setToken(token);
                 dispatch(userLoggedIn(token));
-            }
-            
+                history.push("/");
+            } 
         } catch(apiError) {
             console.log(apiError);
         }
@@ -33,7 +36,7 @@ const LoginPage = () => {
     }
 
     return (
-        <div className="background show-spinner no-footer">
+        <div className="background no-footer">
             <div className="fixed-background">
                 <main>
                     <div className="container">

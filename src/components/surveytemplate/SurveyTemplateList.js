@@ -16,6 +16,10 @@ const SurveyTemplateList = () => {
 
     let history = useHistory();
 
+    // useEffect(()=>{
+    //     history.go(0);
+    // }, []);
+
     useEffect(()=>{
         setTemplates(templatesFromStore);
     }, [templatesFromStore]);

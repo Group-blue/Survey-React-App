@@ -12,23 +12,23 @@ import SurveyList from '../components/surveylist/SurveyList';
 const ManagerPage = () => {
     return (
         <div>
-            <Navbar/>
-            <Menu/>
-            <main>
-                <div>
-                    <Router>
-                            <Switch>
+            <Router>
+                <Navbar/>
+                <Menu/>
+                <main>
+                    <div>
+                        <Switch>
                             <Route exact path="/" component={SurveyTemplateList} />
                             <Route path="/createtemplate" component={SurveyTemplateBody} />
                             <Route path="/templatedetails" component={SurveyTemplateDetails} />
                             <Route path="/surveys" component={SurveyList} />
                             <Redirect to="/" />              
-                            </Switch>
+                        </Switch>
                         <AppMenu/>
-                    </Router>
-                </div>
-            </main>
-            <Footer/>
+                    </div>
+                </main>
+                <Footer/>
+            </Router>
         </div>
     );
 };

@@ -10,10 +10,26 @@ const App = () => {
     loggedIn: store.loggedIn
   }))
 
+  useEffect(()=>{
+    return () => {
+        window.location.reload();
+    }
+  },[])
 
   return (
     <div>
-        {loggedIn ? <ManagerPage/> : <LoginPage/>}
+      <Router forceRefresh={true}>
+        <Switch>
+        <Route exact path="/login">
+          <LoginPage/>
+        </Route>
+        <Route exact path="/">
+          {loggedIn ? <ManagerPage/> : <Redirect to="/login" />}
+        </Route>
+        <Redirect to="/"/>
+        </Switch>
+      </Router>
+        {/* {loggedIn ? <ManagerPage/> : <LoginPage/>} */}
     </div>
   );
 }
