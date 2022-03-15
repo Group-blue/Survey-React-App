@@ -11,20 +11,18 @@ const SurveyTemplateList = () => {
     }))
 
     const[templates, setTemplates] = useState(templatesFromStore);
+    const[apiProgress, setApiProgress] = useState(false);
 
     const dispatch = useDispatch();
 
     let history = useHistory();
-
-    // useEffect(()=>{
-    //     history.go(0);
-    // }, []);
 
     useEffect(()=>{
         setTemplates(templatesFromStore);
     }, [templatesFromStore]);
 
     const onClickUpdateList = async () => {
+        setApiProgress(true);
         try{
             const response = await getAllTemplateListRequest();
             dispatch(updateTemplatesList(response.data));
@@ -32,6 +30,7 @@ const SurveyTemplateList = () => {
             console.log(apiError);
             dispatch(clearTemplatesList());
         }
+        setApiProgress(false);
     }
 
     const onClickListItem = async (itemId) => {
@@ -77,8 +76,8 @@ const SurveyTemplateList = () => {
                     <div className="mb-2">
                         <h1>Survey Templates</h1>
                         <div className="top-right-button-container">
-                            <button type="button" className="btn btn-primary btn-lg top-right-button mr-1" onClick={onClickUpdateList}>
-                                <i className="simple-icon-refresh"></i> UPDATE LIST
+                            <button disabled={apiProgress} type="button" className="btn btn-primary btn-lg top-right-button mr-1" onClick={onClickUpdateList}>
+                            {apiProgress ? <i className="spinner-border spinner-border-sm"></i> : <i className="simple-icon-refresh"></i>} UPDATE LIST
                             </button>
 
                             <div className="btn-group">

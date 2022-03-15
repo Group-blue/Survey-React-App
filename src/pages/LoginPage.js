@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { loginRequest, setToken } from '../api/ApiCalls';
 import { userLoggedIn } from '../redux/actions/TemplateActions';
@@ -31,8 +31,8 @@ const LoginPage = () => {
             } 
         } catch(apiError) {
             console.log(apiError);
-        }
-        setApiProgress(false);
+            setApiProgress(false);
+        } 
     }
 
     return (

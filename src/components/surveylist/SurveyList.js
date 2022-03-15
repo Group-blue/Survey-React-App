@@ -18,6 +18,9 @@ const SurveyList = () => {
     const[selectedCourse, setSelectedCourse] = useState("0");
     const[selectedStartDate, setSelectedStartDate] = useState(convertDateToTimestamp(getCurrentDate()));
     const[selectedEndDate, setSelectedEndDate ] = useState(convertDateToTimestamp(getCurrentDate()));
+    const[apiProgressSurvey, setApiProgressSurvey] = useState(false);
+    const[apiProgressTemplate, setApiProgressTemplate] = useState(false);
+    const[apiProgressCourse, setApiProgressCourse] = useState(false);
 
     const dispatch = useDispatch();
 
@@ -32,6 +35,7 @@ const SurveyList = () => {
     }, [templatesFromStore]);
 
     const onClickUpdateList = async () => {
+        setApiProgressSurvey(true);
         try{
             const response = await getAllSurveyListRequest(); 
             dispatch(updateSurveyList(response.data));
@@ -39,6 +43,7 @@ const SurveyList = () => {
             console.log(apiError);
             dispatch(clearSurveyList());
         }
+        setApiProgressSurvey(false);
     }
 
     const onClickListItem = async (itemId) => {
@@ -56,6 +61,7 @@ const SurveyList = () => {
     }
 
     const onClickUpdateTemplates = async () => {
+        setApiProgressTemplate(true);
         try{
             const response = await getAllTemplateListRequest();
             dispatch(updateTemplatesList(response.data));
@@ -63,9 +69,11 @@ const SurveyList = () => {
             console.log(apiError);
             dispatch(clearTemplatesList());
         }
+        setApiProgressTemplate(false);
     }
 
     const onClickCreateNewSurvey = async () => {
+        setApiProgressSurvey(true);
         const body = {
             startDate: selectedStartDate,
             endDate: selectedEndDate,
@@ -75,12 +83,12 @@ const SurveyList = () => {
 
         try{
             const apiResult = await saveSurveyRequest(body);
+            history.go(0)
             console.log(apiResult);
         } catch(apiError) {
-            console.log(apiError);
+            console.log("api error olustu"+apiError);
         }
-
-        window.location.reload(false);
+        setApiProgressSurvey(false);
     }
 
     return (
@@ -90,8 +98,8 @@ const SurveyList = () => {
                     <div className="mb-2">
                         <h1>Surveys</h1>
                         <div className="top-right-button-container">
-                            <button type="button" className="btn btn-primary btn-lg top-right-button mr-1" onClick={onClickUpdateList}>
-                                <i className="simple-icon-refresh"></i> UPDATE LIST
+                            <button disabled={apiProgressSurvey} type="button" className="btn btn-primary btn-lg top-right-button mr-1" onClick={onClickUpdateList}>
+                                {apiProgressSurvey ? <div className="spinner-border spinner-border-sm"></div> : <i className="simple-icon-refresh"></i>} UPDATE LIST
                             </button>
                             <button type="button" className="btn btn-primary btn-lg top-right-button mr-1"
                                 data-toggle="modal" data-backdrop="static" data-target="#exampleModalRight">
@@ -122,8 +130,8 @@ const SurveyList = () => {
                                                             </select>
                                                         </div>
                                                         <div className="col-md-2">
-                                                            <button type="button" className="btn btn-outline-primary btn-sm mb-2" onClick={onClickUpdateTemplates}>
-                                                                <i className="simple-icon-refresh"></i>
+                                                            <button disabled={apiProgressTemplate} type="button" className="btn btn-outline-primary btn-sm mb-2" onClick={onClickUpdateTemplates}>
+                                                            {apiProgressTemplate ? <i className="spinner-border spinner-border-sm"></i> : <i className="simple-icon-refresh"></i>}
                                                             </button>
                                                         </div>                                                        
                                                     </div>
@@ -166,7 +174,9 @@ const SurveyList = () => {
                                         <div className="modal-footer">
                                             <button type="button" className="btn btn-outline-primary"
                                                 data-dismiss="modal">Cancel</button>
-                                            <button type="button" className="btn btn-primary" onClick={onClickCreateNewSurvey} >Submit</button>
+                                            <button disabled={apiProgressSurvey} type="button" className="btn btn-primary" onClick={onClickCreateNewSurvey} >
+                                            {apiProgressSurvey ? <i className="spinner-border spinner-border-sm"></i> : <i className="simple-icon-check"></i>} Submit
+                                            </button>
                                         </div>
                                     </div>
                                 </div>

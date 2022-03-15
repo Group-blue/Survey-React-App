@@ -29,7 +29,6 @@ const App = () => {
         <Redirect to="/"/>
         </Switch>
       </Router>
-        {/* {loggedIn ? <ManagerPage/> : <LoginPage/>} */}
     </div>
   );
 }
