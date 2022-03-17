@@ -16,8 +16,8 @@ const SurveyList = () => {
     const[surveys, setSurveys] = useState(surveysFromStore);
     const[templates, setTemplates] = useState(templatesFromStore);
     const[courses, setCourses] = useState(coursesFromStore);
-    const[selectedTemplate, setSelectedTemplate] = useState();
-    const[selectedCourse, setSelectedCourse] = useState();
+    const[selectedTemplate, setSelectedTemplate] = useState(1);
+    const[selectedCourse, setSelectedCourse] = useState(1);
     const[selectedStartDate, setSelectedStartDate] = useState(convertDateToTimestamp(getCurrentDate()));
     const[selectedEndDate, setSelectedEndDate ] = useState(convertDateToTimestamp(getCurrentDate()));
     const[apiProgressSurvey, setApiProgressSurvey] = useState(false);
@@ -35,6 +35,14 @@ const SurveyList = () => {
     useEffect(()=>{
         setTemplates(templatesFromStore);
     }, [templatesFromStore]);
+
+    useEffect(()=>{
+        setCourses(coursesFromStore);
+    }, [coursesFromStore]);
+
+    useEffect(()=>{
+        onClickUpdateList();
+    }, []);
 
     const onClickUpdateList = async () => {
         setApiProgressSurvey(true);

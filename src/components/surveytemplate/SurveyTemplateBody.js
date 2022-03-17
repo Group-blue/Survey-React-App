@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { clearTemplate, saveTemplate } from "../../redux/actions/TemplateActions";
 import SingleQuestion from "../questions/SingleQuestion";
 import { saveTemplateRequest } from '../../api/ApiCalls';
+import { useHistory } from 'react-router-dom';
 
 const SurveyTemplateBody = () => {
 
@@ -17,6 +18,8 @@ const SurveyTemplateBody = () => {
     const [explanation, setExplanation] = useState(explanationFromStore);
 
     const dispatch = useDispatch();
+
+    let history = useHistory();
 
     useEffect(()=>{
         setQuestions(questionsFromStore);
@@ -83,6 +86,7 @@ const SurveyTemplateBody = () => {
 
         try{
             const apiResponse = await saveTemplateRequest(template);
+            history.push("/");
         } catch (apiError) {
             console.log(apiError);
         }

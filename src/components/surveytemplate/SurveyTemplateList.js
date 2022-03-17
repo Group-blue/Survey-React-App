@@ -21,6 +21,10 @@ const SurveyTemplateList = () => {
         setTemplates(templatesFromStore);
     }, [templatesFromStore]);
 
+    useEffect(()=>{
+        onClickUpdateList();
+    }, []);
+
     const onClickUpdateList = async () => {
         setApiProgress(true);
         try{
