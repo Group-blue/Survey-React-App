@@ -59,6 +59,9 @@ export const getDefaultState = () => {
             endDate: undefined,
             courseId: undefined,
             templateId: undefined,
+        },
+        courseList: {
+            courses: []
         }
     }
 

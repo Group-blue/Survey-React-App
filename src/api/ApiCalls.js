@@ -21,6 +21,14 @@ export const getAllSurveyListRequest = () => {
     return axios.get(URLS.SURVEY_SVC_URL+URLS.LIST_ALL_SURVEY);
 }
 
+export const getSurveyByToken = (token) => {
+    return axios.get(URLS.SURVEY_SVC_URL+URLS.GET_SURVEY_BY_TOKEN+"?token="+token);
+}
+
+export const getAllCoursesListRequest = () => {
+    return axios.get(URLS.USER_SVC_URL+URLS.LIST_ALL_COURSES);
+}
+
 
 export const saveSurveyRequest = (body) => {
     return axios.post(URLS.SURVEY_SVC_URL+URLS.SAVE_SURVEY, body);

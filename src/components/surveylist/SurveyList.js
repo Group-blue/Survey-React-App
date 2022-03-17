@@ -1,21 +1,23 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllSurveyListRequest, getAllTemplateListRequest, saveSurveyRequest } from "../../api/ApiCalls";
-import { clearSurveyList, updateSurveyList, updateTemplatesList, clearTemplatesList } from "../../redux/actions/TemplateActions";
+import { getAllCoursesListRequest, getAllSurveyListRequest, getAllTemplateListRequest, saveSurveyRequest } from "../../api/ApiCalls";
+import { clearSurveyList, updateSurveyList, updateTemplatesList, clearTemplatesList, updateCourseList } from "../../redux/actions/TemplateActions";
 import SurveyCard from "../surveylist/SurveyCard";
 import { useHistory  } from "react-router-dom";
 import { getCurrentDate, convertDateToTimestamp } from "../../sharedmethods/DateTimeOperations";
 
 const SurveyList = () => {
-    const { surveysFromStore, templatesFromStore } = useSelector(store => ({
+    const { surveysFromStore, templatesFromStore, coursesFromStore } = useSelector(store => ({
         surveysFromStore: store.surveyList.surveys,
-        templatesFromStore: store.surveyTemplateList.templates
+        templatesFromStore: store.surveyTemplateList.templates,
+        coursesFromStore: store.courseList.courses
     }))
 
     const[surveys, setSurveys] = useState(surveysFromStore);
     const[templates, setTemplates] = useState(templatesFromStore);
+    const[courses, setCourses] = useState(coursesFromStore);
     const[selectedTemplate, setSelectedTemplate] = useState();
-    const[selectedCourse, setSelectedCourse] = useState("0");
+    const[selectedCourse, setSelectedCourse] = useState();
     const[selectedStartDate, setSelectedStartDate] = useState(convertDateToTimestamp(getCurrentDate()));
     const[selectedEndDate, setSelectedEndDate ] = useState(convertDateToTimestamp(getCurrentDate()));
     const[apiProgressSurvey, setApiProgressSurvey] = useState(false);
@@ -72,12 +74,24 @@ const SurveyList = () => {
         setApiProgressTemplate(false);
     }
 
+    const onClickUpdateCourses = async () => {
+        setApiProgressCourse(true);
+        try{
+            const response = await getAllCoursesListRequest();
+            dispatch(updateCourseList(response.data));
+        } catch(apiError){
+            console.log(apiError);
+            dispatch(clearTemplatesList());
+        }
+        setApiProgressCourse(false);
+    }
+
     const onClickCreateNewSurvey = async () => {
         setApiProgressSurvey(true);
         const body = {
             startDate: selectedStartDate,
             endDate: selectedEndDate,
-            couseId: selectedCourse,
+            courseId: selectedCourse,
             templateId: selectedTemplate
         }
 
@@ -143,11 +157,14 @@ const SurveyList = () => {
                                                         <div className="col-md-9">
                                                             <select className="form-control" onChange={(event)=>setSelectedCourse(event.target.value)} >
                                                                 <option label="&nbsp;" disabled>&nbsp;</option>
+                                                                {
+                                                                    courses.map(i=> <option key={i.id} value={i.id}>{i.courseCode+" - "+i.name}</option>)
+                                                                }
                                                             </select>
                                                         </div>
                                                         <div className="col-md-2">
-                                                            <button type="button" className="btn btn-outline-primary btn-sm mb-2">
-                                                                <i className="simple-icon-refresh"></i>
+                                                            <button type="button" disabled={apiProgressCourse} className="btn btn-outline-primary btn-sm mb-2" onClick={onClickUpdateCourses}>
+                                                            {apiProgressCourse ? <i className="spinner-border spinner-border-sm"></i> : <i className="simple-icon-refresh"></i>}
                                                             </button>
                                                         </div>                                                        
                                                     </div>

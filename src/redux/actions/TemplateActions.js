@@ -66,3 +66,16 @@ export const userLoggedOut = () => {
         type: ACTIONS.USER_LOGGEDOUT
     };
 };
+
+export const updateCourseList = courses => {
+    return {
+        type: ACTIONS.UPDATE_COURSE_LIST,
+        courses
+    };
+};
+
+export const clearCourseList = () => {
+    return {
+        type: ACTIONS.CLEAR_COURSE_LIST
+    };
+};

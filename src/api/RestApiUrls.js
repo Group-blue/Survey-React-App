@@ -10,5 +10,8 @@ export const UPDATE_SURVEY_TEMPLATE = '/surveytemplate/updatetemplate';
 
 export const SAVE_SURVEY = '/survey/save';
 export const LIST_ALL_SURVEY = '/survey/listallsurveys';
+export const GET_SURVEY_BY_TOKEN = '/survey/getsurveybytoken';
+
+export const LIST_ALL_COURSES = '/course/listall';
 
 export const LOGIN = '/auth/login';

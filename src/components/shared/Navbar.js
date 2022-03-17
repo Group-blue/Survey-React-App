@@ -43,6 +43,11 @@ const Navbar = () => {
                     </div>
                 </div>
 
+                <a className="navbar-logo" href="#/">
+                        <span className="logo d-none d-xs-block"></span>
+                        <span className="logo-mobile d-block d-xs-none"></span>
+                    </a>
+
                 <div className="navbar-right">
                     <div className="header-icons d-inline-block align-middle">
                         <div className="d-none d-md-inline-block align-text-bottom mr-3">

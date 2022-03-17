@@ -28,7 +28,9 @@ const LoginPage = () => {
                 setToken(token);
                 dispatch(userLoggedIn(token));
                 history.push("/");
-            } 
+            } else{
+                setApiProgress(false);
+            }
         } catch(apiError) {
             console.log(apiError);
             setApiProgress(false);

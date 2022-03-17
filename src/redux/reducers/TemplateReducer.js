@@ -44,6 +44,14 @@ const TemplateReducer = (state = {...getDefaultState}, action) => {
         tempState.loggedIn = false;
         tempState.userCredentials.token = "";
         return tempState;
+    } else if(action.type === ACTIONS.UPDATE_COURSE_LIST) {
+        let tempState = {...state};
+        tempState.courseList.courses = [...action.courses];
+        return tempState;
+    } else if(action.type === ACTIONS.CLEAR_COURSE_LIST) {
+        let tempState = {...state};
+        tempState.courseList.courses = [];
+        return tempState;
     }
     return state;
 }
