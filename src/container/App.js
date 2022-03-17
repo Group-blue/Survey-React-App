@@ -17,11 +17,11 @@ const App = () => {
       <Router forceRefresh={true}>
         <Switch>
 
-        <Route path="/login">
+        <Route exact path="/login">
           <LoginPage/>
         </Route>
 
-        <Route path="/survey" component={SurveyDetailsFromToken}/>
+        <Route exact path="/survey" component={SurveyDetailsFromToken}/>
 
         <Route exact path="/">
           {loggedIn ? <ManagerPage/> : <Redirect to="/login" />}

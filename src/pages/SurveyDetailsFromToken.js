@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Footer from '../components/shared/Footer';
 import { getSurveyByToken } from '../api/ApiCalls';
+import { useHistory } from 'react-router-dom';
 
 const SurveyDetailsFromToken = (props) => {
     const query = new URLSearchParams(props.location.search);
@@ -8,12 +9,28 @@ const SurveyDetailsFromToken = (props) => {
 
     const token = query.get('token');
 
-    useEffect(()=>{getSurveyFromApi()},[]);
+    let history = useHistory();
+
+    useEffect(()=>{
+        if(!token){
+            history.push("/login");
+        } else if(token.length<128){
+            history.push("/login");
+        }
+        getSurveyFromApi();
+    },[]);
 
     const getSurveyFromApi = async () => {
         try{
             const response = await getSurveyByToken(token);
-            setResponseData(response.data);
+            if(response.data.status ===200){
+                setResponseData(response.data);
+            } else {
+                let responseError={
+                    error: "Hatalı veya tarihi geçmiş link.."
+                }
+                setResponseData(responseError);
+            }
         } catch (apiError) {
             console.log(apiError);
         }
