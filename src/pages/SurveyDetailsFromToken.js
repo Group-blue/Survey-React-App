@@ -32,10 +32,10 @@ const SurveyDetailsFromToken = (props) => {
     },[]);
 
     useEffect(() => {
-        setTimeout(() => {
-          history.push('/login')
-        }, 5000)
-      }, [tokenStatus]);
+        if(errorStatus){
+            setTimeout(() => {history.push('/login')}, 5000);
+        }
+      }, [errorStatus]);
 
     const getSurveyFromApi = async () => {
         try{
