@@ -18,7 +18,7 @@ const App = () => {
         <Switch>
 
         <Route exact path="/login">
-          <LoginPage/>
+          {loggedIn ? <Redirect to="/"/> : <LoginPage/>}
         </Route>
 
         <Route exact path="/survey" component={SurveyDetailsFromToken}/>
