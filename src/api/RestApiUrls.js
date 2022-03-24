@@ -14,4 +14,6 @@ export const GET_SURVEY_BY_TOKEN = '/survey/getsurveybytoken';
 
 export const LIST_ALL_COURSES = '/course/listall';
 
+export const SAVE_STUDENT_ANSWER = '/studentanswers/save';
+
 export const LOGIN = '/auth/login';

@@ -41,3 +41,7 @@ export const loginRequest = (body) => {
 export const setToken = (token) => {
     axios.defaults.headers['Authorization'] = 'Bearer ' + token;
 }
+
+export const saveUserAnswersRequest = (body) => {
+    return axios.post(URLS.SURVEY_SVC_URL+URLS.SAVE_STUDENT_ANSWER, body);
+}

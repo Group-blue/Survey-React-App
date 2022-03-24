@@ -55,7 +55,7 @@ const LoginPage = () => {
                                         </p>
                                     </div>
                                     <div className="form-side">
-                                        <a href="Dashboard.Default.html">
+                                        <a href="/">
                                             <span className="logo-single"></span>
                                         </a>
                                         <h6 className="mb-4">Login</h6>
